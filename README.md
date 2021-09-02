@@ -5,4 +5,4 @@
 Gyro is a framework to make 3D visual effect.
 
 ## Goal
-* [ ] Create a win32 basic window
+[ ] Create a win32 basic window
