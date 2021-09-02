@@ -2,7 +2,9 @@
 
 ## What is this?
 
-Gyro is a framework to make 3D visual effect.
+Gyro is a framework to make 3D visual effects.
+
+It's a collboration between @joakimwennergren and ...
 
 ## Stepping stones
 * [X] Create a win32 basic window
