@@ -14,6 +14,7 @@ For now the target is windows platform.
 * [ ] wrap it in c++ classes
 * [ ] strip unnecessary code/features (like the about callback)
 * [ ] Decide on what GPU/3D API to use
+* https://alain.xyz/blog/comparison-of-modern-graphics-apis
 
 ## Resources
 
