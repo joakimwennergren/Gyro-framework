@@ -34,4 +34,4 @@ might be good for inspiration regarding drawing functions etc.
 * https://www.enlyze.com/blog/writing-win32-apps-like-its-2020/part-2/
 
 ### Documentation
-https://vulkan.lunarg.com/
+* https://vulkan.lunarg.com/
