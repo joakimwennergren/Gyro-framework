@@ -14,4 +14,5 @@ It's a collboration between @joakimwennergren and ...
 ## Resources
 
 * https://www.raylib.com/ - raylib is a simple and easy-to-use library to enjoy videogames programming. 
-* might be good for inspiration regarding drawing functions etc.
+ might be good for inspiration regarding drawing functions etc.
+* 
