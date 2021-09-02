@@ -3,7 +3,7 @@
 
 #include "framework.h"
 #include "Gyro.h"
-
+#include <vulkan/vulkan.hpp>
 #define MAX_LOADSTRING 100
 
 // Global Variables:
