@@ -8,6 +8,8 @@ It's a collboration between @joakimwennergren and @klorex
 
 ## Target
 For now the target is windows platform.
+https://github.com/alaingalvan/CrossWindow
+Why not make it crossplatform? :>
 
 ## Stepping stones
 * [X] Create a win32 basic window
