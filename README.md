@@ -13,8 +13,9 @@ https://github.com/alaingalvan/CrossWindow
 
 ## Stepping stones
 * [X] Create a win32 basic window
-* [ ] wrap it in c++ classes
-* [ ] strip unnecessary code/features (like the about callback)
+* [X] wrap it in c++ classes
+* [X] strip unnecessary code/features (like the about callback)
+* [X] Create a vulkan window
 * [ ] Decide on what GPU/3D API to use
 * https://alain.xyz/blog/comparison-of-modern-graphics-apis
 
