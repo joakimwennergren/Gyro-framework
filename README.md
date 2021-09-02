@@ -26,3 +26,6 @@ might be good for inspiration regarding drawing functions etc.
 * https://www.vulkan.org/
 * https://docs.microsoft.com/en-us/windows/win32/direct3d
 * https://www.opengl.org/
+
+### Programming C/C++
+* https://www.enlyze.com/blog/writing-win32-apps-like-its-2020/part-2/
