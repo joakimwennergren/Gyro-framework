@@ -9,7 +9,7 @@ It's a collboration between @joakimwennergren and @klorex
 ## Target
 For now the target is windows platform.
 https://github.com/alaingalvan/CrossWindow
-( cant build a static/dynamic library out of it so fuck it )
+(cant build a static/dynamic library out of it so fuck it)
 
 ## Stepping stones
 * [X] ~~Create a win32 basic window~~
