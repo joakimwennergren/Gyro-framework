@@ -49,3 +49,4 @@ might be good for inspiration regarding drawing functions etc.
 
 ### Closed issues
 * [X] GLM added to the repo - it contains math functions (matrix multiplication etc)
+* [X] Added a small trace/logging lib
