@@ -5,7 +5,7 @@
 
 int main()
 {
-    Window* window = new Window();
+    Window* window = new Window("Vulkan evaluation");
     
     window->handleEvents();
 

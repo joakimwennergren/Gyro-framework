@@ -1,84 +1,36 @@
 #include "Window.h"
 
-Window::Window()
+/// <summary>
+/// Window constructor.
+/// 1. Sets up a GLFW window
+/// 2. Creating a vulkan instance.
+/// 3. Enumerate vulkan extensions
+/// </summary>
+/// <param name="name"></param>
+Window::Window(const char * name)
 {
-	glfwInit();
+	this->name = name;
 
-	glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
-	glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
+	// GLFW Initialization
 
-	GLFWwindow* window = glfwCreateWindow(800, 600, "Vulkan window", nullptr, nullptr);
+	this->initializeGLFW();
 
-	this->window = window;
+	// Creating a vulkan instance
 
-	// **TEMP** SETUP VULKAN INSTANCE
-	VkApplicationInfo appInfo{};
-	appInfo.sType = VK_STRUCTURE_TYPE_APPLICATION_INFO;
-	appInfo.pApplicationName = "Hello Triangle";
-	appInfo.applicationVersion = VK_MAKE_VERSION(1, 0, 0);
-	appInfo.pEngineName = "No Engine";
-	appInfo.engineVersion = VK_MAKE_VERSION(1, 0, 0);
-	appInfo.apiVersion = VK_API_VERSION_1_0;
+	this->createVulkanInstance();
 
-	VkInstanceCreateInfo createInfo{};
-	createInfo.sType = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO;
-	createInfo.pApplicationInfo = &appInfo;
+	// Enumerating vulkan extensions
 
-	uint32_t glfwExtensionCount = 0;
-	const char** glfwExtensions;
+	this->enumerateVulkanExtensions();
 
-	glfwExtensions = glfwGetRequiredInstanceExtensions(&glfwExtensionCount);
+	// Enumerating physical devices
 
-	createInfo.enabledExtensionCount = glfwExtensionCount;
-	createInfo.ppEnabledExtensionNames = glfwExtensions;
+	this->enumeratePhysicalDevices();
 
-	createInfo.enabledLayerCount = 0;
-
-	if (vkCreateInstance(&createInfo, nullptr, &this->instance) != VK_SUCCESS) {
-		printf("ERRRRRROROOOOO");
-	}
-
-	uint32_t extensionCount = 0;
-	vkEnumerateInstanceExtensionProperties(nullptr, &extensionCount, nullptr);
-
-	std::vector<VkExtensionProperties> extensions(extensionCount);
-
-	vkEnumerateInstanceExtensionProperties(nullptr, &extensionCount, extensions.data());
-
-	std::cout << "available extensions:\n";
-
-	for (const auto& extension : extensions) {
-		std::cout << '\t' << extension.extensionName << '\n';
-	}
-
-	// **TEMP** PICK A PHYSICAL GRAPHICS CARD 
-
-	VkPhysicalDevice physicalDevice = VK_NULL_HANDLE;
-
-	uint32_t deviceCount = 0;
-	vkEnumeratePhysicalDevices(instance, &deviceCount, nullptr);
-
-	if (deviceCount == 0) {
-		printf("Failed to find graphics card supported with vulkan");
-	}
-
-	std::vector<VkPhysicalDevice> devices(deviceCount);
-	vkEnumeratePhysicalDevices(instance, &deviceCount, devices.data());
-
-	for (const auto& device : devices) {
-		if (isDeviceSuitable(device)) {
-			physicalDevice = device;
-			break;
-		}
-	}
-
-	if (physicalDevice == VK_NULL_HANDLE) {
-		printf("couldnt find a suitable GPU");
-	}
-
+	/*
 	// ** TEMP CREATE A LOGICAL DEVICE
 
-	QueueFamilyIndices indices = findQueueFamilies(physicalDevice);
+	QueueFamilyIndices indices = this->findQueueFamilies(physicalDevice);
 
 	VkDeviceQueueCreateInfo queueCreateInfo{};
 	queueCreateInfo.sType = VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO;
@@ -122,12 +74,14 @@ Window::Window()
 	if (glfwCreateWindowSurface(instance, window, nullptr, &surface) != VK_SUCCESS) {
 		printf("Failed to create surface");
 	}
+
+	*/
 }
 
 Window::~Window()
 {
-	vkDestroySurfaceKHR(instance, surface, nullptr);
-	vkDestroyDevice(this->device, nullptr);
+	//vkDestroySurfaceKHR(instance, surface, nullptr);
+	//vkDestroyDevice(this->device, nullptr);
 	vkDestroyInstance(this->instance, nullptr);
 	glfwDestroyWindow(this->window);
 	glfwTerminate();
@@ -141,7 +95,7 @@ void Window::handleEvents()
 }
 
 bool Window::isDeviceSuitable(VkPhysicalDevice device) {
-	QueueFamilyIndices indices = findQueueFamilies(device);
+	QueueFamilyIndices indices = this->findQueueFamilies(device);
 
 	return indices.isComplete();
 }
@@ -170,4 +124,103 @@ QueueFamilyIndices Window::findQueueFamilies(VkPhysicalDevice device) {
 
 
 	return indices;
+}
+
+void Window::initializeGLFW()
+{
+	spdlog::info("Trying to create a GLFW Window..");
+
+	// Initialize GLFW lib
+	glfwInit();
+
+	// Don't use openGL and don't allow window resizing
+	glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
+	glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
+
+	// Assign & create the window
+	this->window = glfwCreateWindow(
+		WINDOW_W,
+		WINDOW_H,
+		name,
+		nullptr, // 1 monitor windowed for now..
+		nullptr // don't share context
+	);
+
+	if (!this->window)
+	{
+		spdlog::critical("Couldn\'t create GLFW window");
+		return;
+	}
+
+	spdlog::info("Successfully Created a GLFW Window!");
+}
+
+void Window::enumerateVulkanExtensions()
+{
+	spdlog::info("Enumerating vulkan extensions..");
+
+	uint32_t extensionCount = 0;
+	vkEnumerateInstanceExtensionProperties(nullptr, &extensionCount, nullptr);
+
+	std::vector<VkExtensionProperties> extensions(extensionCount);
+
+	vkEnumerateInstanceExtensionProperties(nullptr, &extensionCount, extensions.data());
+
+	for (const auto& extension : extensions) {
+		spdlog::info("{0}, version: {1}", extension.extensionName, extension.specVersion);
+	}
+}
+
+void Window::createVulkanInstance()
+{
+	spdlog::info("Trying to create a vulkan instance..");
+
+	// Struct containing basic information about the application
+	const VkApplicationInfo appInfo{
+		VK_STRUCTURE_TYPE_APPLICATION_INFO,
+		this->name,
+		nullptr,
+		VK_MAKE_VERSION(1, 0, 0),
+		"Gyro",
+		VK_MAKE_VERSION(1, 0, 0),
+		VK_API_VERSION_1_0
+	};
+
+	// Struct containing information about the vulkan instance
+	VkInstanceCreateInfo createInfo{};
+	createInfo.sType = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO;
+	createInfo.pApplicationInfo = &appInfo;
+
+	// Gather extension count and extension names
+	uint32_t glfwExtensionCount = 0;
+	const char** glfwExtensions = glfwGetRequiredInstanceExtensions(&glfwExtensionCount);
+	createInfo.enabledExtensionCount = glfwExtensionCount;
+	createInfo.ppEnabledExtensionNames = glfwExtensions;
+
+	// Enable layer count?
+	createInfo.enabledLayerCount = 0;
+
+	if (vkCreateInstance(&createInfo, nullptr, &this->instance) != VK_SUCCESS) {
+		spdlog::critical("Couldn\'t create a vulkan instance!");
+		return;
+	}
+
+	spdlog::info("Successfully Created a vulkan instance!");
+}
+
+void Window::enumeratePhysicalDevices()
+{
+
+	spdlog::info("Enumerating physical devices(video cards)..");
+
+	uint32_t deviceCount = 0;
+
+	vkEnumeratePhysicalDevices(this->instance, &deviceCount, nullptr);
+
+	if (deviceCount == 0) {
+		spdlog::critical("Couldn\'t find a physical device!");
+		return;
+	}
+
+	spdlog::info("Found {0} device(s)!", deviceCount);
 }
