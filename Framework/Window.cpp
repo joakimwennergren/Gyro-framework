@@ -11,19 +11,11 @@ Window::Window(const char * name)
 {
 	this->name = name;
 
-	// GLFW Initialization
-
 	this->initializeGLFW();
-
-	// Creating a vulkan instance
 
 	this->createVulkanInstance();
 
-	// Enumerating vulkan extensions
-
 	this->enumerateVulkanExtensions();
-
-	// Enumerating physical devices
 
 	this->enumeratePhysicalDevices();
 
