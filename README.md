@@ -9,12 +9,14 @@ It's a collboration between @joakimwennergren and @klorex
 ## Target
 For now the target is windows platform.
 https://github.com/alaingalvan/CrossWindow
-( cant build a static/dynamic library out of it so fuck it )
+(can't build a static/dynamic library out of it so fuck it)
 
 ## Stepping stones
-* [X] Create a win32 basic window
-* [ ] wrap it in c++ classes
-* [ ] strip unnecessary code/features (like the about callback)
+* [X] ~~Create a win32 basic window~~
+* [X] ~~wrap it in c++ classes~~
+* [X] ~~strip unnecessary code/features (like the about callback)~~
+* [X] Create an opengl context window
+* [ ] Bind vulkan to it
 * [ ] Decide on what GPU/3D API to use
 * https://alain.xyz/blog/comparison-of-modern-graphics-apis
 
@@ -35,3 +37,15 @@ might be good for inspiration regarding drawing functions etc.
 
 ### Documentation
 * https://vulkan.lunarg.com/
+
+### Findings
+* Creating a regular old win32 window doesnt cut it. You need to create the window with https://www.glfw.org/. Vulkan on it's own cant do this.
+* When a window is created a vulkan instance is then created and bound to the window if i understand correctly.
+
+### Open issues
+* [ ] Which 3D file format should we use?
+* [ ] Music synchronization. How do we sync our demo with the music?
+* [ ] Should we use a test-driven approach?
+
+### Closed issues
+* [X] GLM added to the repo - it contains math functions (matrix multiplication etc)
