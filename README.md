@@ -16,7 +16,7 @@ https://github.com/alaingalvan/CrossWindow
 * [X] ~~wrap it in c++ classes~~
 * [X] ~~strip unnecessary code/features (like the about callback)~~
 * [X] Create an opengl context window
-* [ ] Bind vulkan to it
+* [X] Bind vulkan to it
 * [ ] Decide on what GPU/3D API to use
 * https://alain.xyz/blog/comparison-of-modern-graphics-apis
 
