@@ -37,3 +37,11 @@ might be good for inspiration regarding drawing functions etc.
 
 ### Documentation
 * https://vulkan.lunarg.com/
+
+### Findings
+* Creating a regular old win32 window doesnt cut it. You need to create the window with https://www.glfw.org/. Vulkan on it's own cant do this.
+* When a window is created a vulkan instance is then created and bound to the window if i understand correctly.
+
+### Open issues
+
+### Closed issues
