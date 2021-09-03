@@ -32,7 +32,7 @@
     <ClInclude Include="Window.h">
       <Filter>Header Files\Window</Filter>
     </ClInclude>
-    <ClInclude Include="Framework.h">
+    <ClInclude Include="Framework.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
