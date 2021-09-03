@@ -43,5 +43,9 @@ might be good for inspiration regarding drawing functions etc.
 * When a window is created a vulkan instance is then created and bound to the window if i understand correctly.
 
 ### Open issues
+* [ ] Which 3D file format should we use?
+* [ ] Music synchronization. How do we sync our demo with the music?
+* [ ] 
 
 ### Closed issues
+* [X] GLM added to the repo - it contains math functions (matrix multiplication etc)
