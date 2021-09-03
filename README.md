@@ -45,6 +45,7 @@ might be good for inspiration regarding drawing functions etc.
 ### Open issues
 * [ ] Which 3D file format should we use?
 * [ ] Music synchronization. How do we sync our demo with the music?
+* [ ] Should we use a test-driven approach?
 
 ### Closed issues
 * [X] GLM added to the repo - it contains math functions (matrix multiplication etc)
