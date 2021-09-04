@@ -7,7 +7,7 @@ int main()
 {
     Window* window = new Window("Vulkan evaluation");
     
-    window->handleEvents();
+    window->loop();
 
     delete window;
 

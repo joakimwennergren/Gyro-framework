@@ -10,6 +10,7 @@
 #include <set>
 #include <cstdint> // Necessary for UINT32_MAX
 #include <algorithm> // Necessary for std::min/std::max
+#include <fstream>
 
 #define WINDOW_W	800
 #define WINDOW_H	640
@@ -20,18 +21,22 @@ struct SwapChainSupportDetails {
 	std::vector<VkPresentModeKHR> presentModes;
 };
 
-struct QueueFamilyIndices {
-	std::optional<uint32_t> graphicsFamily;
-	std::optional<uint32_t> presentFamily;
 
-	bool isComplete() {
-		return graphicsFamily.has_value() && presentFamily.has_value();
-	}
-};
 
 class Window
 {
 public:
+
+	struct QueueFamilyIndices {
+		std::optional<uint32_t> graphicsFamily;
+		std::optional<uint32_t> presentFamily;
+
+		bool isComplete() {
+			return graphicsFamily.has_value() && presentFamily.has_value();
+		}
+	};
+
+	QueueFamilyIndices findQueueFamilies(VkPhysicalDevice device);
 
 	// Constructor
 	Window(const char * name);
@@ -40,7 +45,7 @@ public:
 	~Window();
 
 	// Handle basic events such as window resizing, closing the window etc..
-	void handleEvents();
+	void loop();
 
 	static VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(
 		VkDebugUtilsMessageSeverityFlagBitsEXT messageSeverity,
@@ -53,6 +58,24 @@ public:
 		return VK_FALSE;
 	}
 
+	static std::vector<char> readFile(const std::string& filename) {
+		std::ifstream file(filename, std::ios::ate | std::ios::binary);
+
+		if (!file.is_open()) {
+			spdlog::critical("Failed to open file!");
+		}
+
+		size_t fileSize = (size_t)file.tellg();
+		std::vector<char> buffer(fileSize);
+
+		file.seekg(0);
+		file.read(buffer.data(), fileSize);
+
+		file.close();
+
+		return buffer;
+	}
+
 private:
 
 	const char* name;
@@ -62,7 +85,7 @@ private:
 	// Helper functions to decide if physical device is suitable for the application
 	// And to find queue families.
 	bool isDeviceSuitable(VkPhysicalDevice device);
-	QueueFamilyIndices findQueueFamilies(VkPhysicalDevice device);
+
 	VkSurfaceFormatKHR chooseSwapSurfaceFormat(const std::vector<VkSurfaceFormatKHR>& availableFormats);
 	VkPresentModeKHR chooseSwapPresentMode(const std::vector<VkPresentModeKHR>& availablePresentModes);
 	VkExtent2D chooseSwapExtent(const VkSurfaceCapabilitiesKHR& capabilities);
@@ -84,6 +107,10 @@ private:
 
 	const std::vector<const char*> validationLayers = {
 		"VK_LAYER_KHRONOS_validation"
+	};
+
+	const std::vector<const char*> deviceExtensions = {
+		VK_KHR_SWAPCHAIN_EXTENSION_NAME
 	};
 
 	VkResult CreateDebugUtilsMessengerEXT(
@@ -127,5 +154,55 @@ private:
 
 	// Debugging
 	VkDebugUtilsMessengerEXT debugMessenger;
+
+	std::vector<VkImage> swapChainImages;
+	VkFormat swapChainImageFormat;
+	VkExtent2D swapChainExtent;
+	std::vector<VkImageView> swapChainImageViews;
+
+	VkShaderModule vertShaderModule;
+	VkShaderModule fragShaderModule;
+
+	VkRenderPass renderPass;
+	VkPipelineLayout pipelineLayout;
+	VkPipeline graphicsPipeline;
+
+	std::vector<VkFramebuffer> swapChainFramebuffers;
+
+
+	void createRenderPass();
+
+	void createFramebuffers();
+
+	VkCommandPool commandPool;
+
+	std::vector<VkCommandBuffer> commandBuffers;
+
+	VkShaderModule createShaderModule(const std::vector<char>& code);
+	void createGraphicsPipeline();
+
+	void createCommandPool();
+	void createCommandBuffers();
+
+
+	void createSemaphores();
+
+	void drawFrame();
+
+	void initVulkan();
+
+	void createSurface();
+
+	void createImageViews();
+
+	SwapChainSupportDetails querySwapChainSupport(VkPhysicalDevice device);
+	void createSwapChain();
+
+	bool checkDeviceExtensionSupport(VkPhysicalDevice device);
+
+	VkSemaphore imageAvailableSemaphore;
+	VkSemaphore renderFinishedSemaphore;
 };
+
+
 

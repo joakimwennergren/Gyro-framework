@@ -19,6 +19,9 @@
     <Filter Include="Source Files\Window">
       <UniqueIdentifier>{b66fb85a-48c1-4be3-a8c8-9efecd4fe5d2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Shaders">
+      <UniqueIdentifier>{2deb39e2-8cf4-49e3-ada8-339713e1cef2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Framework.cpp">
@@ -35,5 +38,16 @@
     <ClInclude Include="Framework.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Shader.vert">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Shader.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="compile_shader.bat">
+      <Filter>Shaders</Filter>
+    </None>
   </ItemGroup>
 </Project>
