@@ -42,6 +42,9 @@ might be good for inspiration regarding drawing functions etc.
 * Creating a regular old win32 window doesnt cut it. You need to create the window with https://www.glfw.org/. Vulkan on it's own cant do this.
 * When a window is created a vulkan instance is then created and bound to the window if i understand correctly.
 
+### Similar projects
+* https://github.com/mosra/magnum
+
 ### Open issues
 * [ ] Which 3D file format should we use?
 * [ ] Music synchronization. How do we sync our demo with the music?
