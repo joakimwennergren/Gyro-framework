@@ -40,17 +40,32 @@
     <Filter Include="Source Files\Model">
       <UniqueIdentifier>{732211b3-ba03-467e-b391-599e2c69e717}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Device">
-      <UniqueIdentifier>{c320382b-8eea-42cf-a9d0-7e35108651fa}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Device">
-      <UniqueIdentifier>{bfd88e99-1fc9-48bb-b349-3a25cf7214fd}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Resource Files\Textures">
       <UniqueIdentifier>{176b25aa-25e0-476d-8345-c270397e60a8}</UniqueIdentifier>
     </Filter>
     <Filter Include="Resource Files\Models">
       <UniqueIdentifier>{0ccad8c0-ecf7-4a88-8ddb-12b1916e031c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Vulkan">
+      <UniqueIdentifier>{cae03d21-07ef-4453-8bc7-a3f995e8e942}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Vulkan\Device">
+      <UniqueIdentifier>{c320382b-8eea-42cf-a9d0-7e35108651fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Vulkan\ValidationLayer">
+      <UniqueIdentifier>{af49d8be-9329-4be5-833d-58986460e8e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Vulkan">
+      <UniqueIdentifier>{12215eb2-e427-4e7e-974e-d4dd9cf3382a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Vulkan\Device">
+      <UniqueIdentifier>{bfd88e99-1fc9-48bb-b349-3a25cf7214fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Vulkan\ValidationLayer">
+      <UniqueIdentifier>{ed873418-0d69-43a7-93d3-43c0eb490d81}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Configuration">
+      <UniqueIdentifier>{0add5750-894d-4570-bbbd-be2c9252f359}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -67,7 +82,10 @@
       <Filter>Source Files\Model</Filter>
     </ClCompile>
     <ClCompile Include="LogicalDevice.cpp">
-      <Filter>Source Files\Device</Filter>
+      <Filter>Source Files\Vulkan\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="ValidationLayer.cpp">
+      <Filter>Source Files\Vulkan\ValidationLayer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -84,7 +102,13 @@
       <Filter>Header Files\Model</Filter>
     </ClInclude>
     <ClInclude Include="LogicalDevice.hpp">
-      <Filter>Header Files\Device</Filter>
+      <Filter>Header Files\Vulkan\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="ValidationLayer.hpp">
+      <Filter>Header Files\Vulkan\ValidationLayer</Filter>
+    </ClInclude>
+    <ClInclude Include="Configuration.hpp">
+      <Filter>Header Files\Configuration</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

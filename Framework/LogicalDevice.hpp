@@ -6,7 +6,6 @@ class LogicalDevice
 {
 public:
 	LogicalDevice(VkPhysicalDevice physicalDevice);
-
 	VkDevice instance;
 protected:
 

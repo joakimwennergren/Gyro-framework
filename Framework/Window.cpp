@@ -1,6 +1,8 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "Window.hpp"
 #include "logicalDevice.hpp"
+#include "ValidationLayer.hpp"
+#include "Configuration.hpp"
 
 /// <summary>
 /// Window constructor.
@@ -13,12 +15,14 @@ Window::Window()
 {
 
 	// GLFW
-	this->initializeGLFW();
+	initializeGLFW();
 
-	if (enableValidationLayers && !checkValidationLayerSupport()) {
+#ifdef ENABLE_VALIDATION_LAYERS
+	if (!ValidationLayer::checkValidationLayerSupport()) {
 		spdlog::critical("Validation layers requested, but not available!");
 		return;
 	}
+#endif
 
 	initVulkan();
 }
@@ -151,32 +155,6 @@ void Window:: createSwapChain() {
 
 	swapChainImageFormat = surfaceFormat.format;
 	swapChainExtent = extent;
-}
-
-bool Window::checkValidationLayerSupport() {
-	
-	uint32_t layerCount;
-	vkEnumerateInstanceLayerProperties(&layerCount, nullptr);
-
-	std::vector<VkLayerProperties> availableLayers(layerCount);
-	vkEnumerateInstanceLayerProperties(&layerCount, availableLayers.data());
-	
-	for (const char* layerName : validationLayers) {
-		bool layerFound = false;
-
-		for (const auto& layerProperties : availableLayers) {
-			if (strcmp(layerName, layerProperties.layerName) == 0) {
-				layerFound = true;
-				break;
-			}
-		}
-
-		if (!layerFound) {
-			return false;
-		}
-	}
-
-	return true;
 }
 
 VkSurfaceFormatKHR  Window::chooseSwapSurfaceFormat(const std::vector<VkSurfaceFormatKHR>& availableFormats) 

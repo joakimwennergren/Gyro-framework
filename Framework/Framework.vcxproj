@@ -151,13 +151,16 @@
     <ClCompile Include="BaseModel.cpp" />
     <ClCompile Include="LogicalDevice.cpp" />
     <ClCompile Include="ModelHelper.cpp" />
+    <ClCompile Include="ValidationLayer.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Configuration.hpp" />
     <ClInclude Include="Framework.hpp" />
     <ClInclude Include="BaseModel.hpp" />
     <ClInclude Include="LogicalDevice.hpp" />
     <ClInclude Include="ModelHelper.hpp" />
+    <ClInclude Include="ValidationLayer.hpp" />
     <ClInclude Include="Window.hpp" />
   </ItemGroup>
   <ItemGroup>
