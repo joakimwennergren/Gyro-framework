@@ -19,8 +19,8 @@ https://github.com/alaingalvan/CrossWindow
 * [X] Bind vulkan to it
 * [X] Decide on what GPU/3D API to use (I choose you, vulkan! why? because you can optimize and have greater control over everything)
 * https://alain.xyz/blog/comparison-of-modern-graphics-apis
-* [ ] Clean vulkan warnings/errors 
-* [ ] Restructure code
+* [] Clean vulkan warnings/errors 
+* [] Restructure code
 
 ## Resources
 
