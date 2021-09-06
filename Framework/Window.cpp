@@ -1,6 +1,5 @@
 #define STB_IMAGE_IMPLEMENTATION
-#define TINYOBJLOADER_IMPLEMENTATION
-#include "Window.h"
+#include "Window.hpp"
 
 /// <summary>
 /// Window constructor.
@@ -156,6 +155,7 @@ void Window:: createSwapChain() {
 }
 
 bool Window::checkValidationLayerSupport() {
+	
 	uint32_t layerCount;
 	vkEnumerateInstanceLayerProperties(&layerCount, nullptr);
 
@@ -207,6 +207,8 @@ VkExtent2D Window::chooseSwapExtent(const VkSurfaceCapabilitiesKHR& capabilities
 	if (capabilities.currentExtent.width != UINT32_MAX) {
 		return capabilities.currentExtent;
 	}
+
+
 	else {
 		int width, height;
 		glfwGetFramebufferSize(window, &width, &height);
@@ -1093,14 +1095,3 @@ void Window::transitionImageLayout(VkImage image, VkFormat format, VkImageLayout
 	endSingleTimeCommands(commandBuffer);
 }
 
-void Window::loadModel() {
-	tinyobj::attrib_t attrib;
-	std::vector<tinyobj::shape_t> shapes;
-	std::vector<tinyobj::material_t> materials;
-	std::string warn, err;
-
-	if (!tinyobj::LoadObj(&attrib, &shapes, &materials, &warn, &err, MODEL_PATH.c_str())) {
-		throw std::runtime_error(warn + err);
-	}
-
-}

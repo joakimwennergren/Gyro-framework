@@ -28,6 +28,24 @@
     <Filter Include="Textures">
       <UniqueIdentifier>{176b25aa-25e0-476d-8345-c270397e60a8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Helpers">
+      <UniqueIdentifier>{581264f9-6ddc-4421-a910-015ce908e8f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Helpers">
+      <UniqueIdentifier>{33c526e8-ceb1-49c4-894a-ac779456c065}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Helpers\Models">
+      <UniqueIdentifier>{babea96b-bd3e-4125-a16d-fc541c830924}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Helpers\Models">
+      <UniqueIdentifier>{87bc3371-b0ed-439e-985b-426215dbd8b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Model">
+      <UniqueIdentifier>{2b3f8856-23b8-4086-99cc-ebcb3c638041}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Model">
+      <UniqueIdentifier>{732211b3-ba03-467e-b391-599e2c69e717}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Framework.cpp">
@@ -36,13 +54,25 @@
     <ClCompile Include="Window.cpp">
       <Filter>Source Files\Window</Filter>
     </ClCompile>
+    <ClCompile Include="ModelHelper.cpp">
+      <Filter>Source Files\Helpers\Models</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseModel.cpp">
+      <Filter>Source Files\Model</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Window.h">
+    <ClInclude Include="Window.hpp">
       <Filter>Header Files\Window</Filter>
     </ClInclude>
     <ClInclude Include="Framework.hpp">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelHelper.hpp">
+      <Filter>Header Files\Helpers\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseModel.hpp">
+      <Filter>Header Files\Model</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

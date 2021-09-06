@@ -148,11 +148,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Framework.cpp" />
+    <ClCompile Include="BaseModel.cpp" />
+    <ClCompile Include="ModelHelper.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework.hpp" />
-    <ClInclude Include="Window.h" />
+    <ClInclude Include="BaseModel.hpp" />
+    <ClInclude Include="ModelHelper.hpp" />
+    <ClInclude Include="Window.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="compile_shader.bat" />
