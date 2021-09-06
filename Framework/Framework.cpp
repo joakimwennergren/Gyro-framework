@@ -1,11 +1,11 @@
 // Framework.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
-#include "Window.h"
+#include "Window.hpp"
 #include <iostream>
 
 int main()
 {
-    Window* window = new Window("Vulkan evaluation");
+    Window* window = new Window();
     
     window->loop();
 

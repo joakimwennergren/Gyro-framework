@@ -46,6 +46,12 @@
     <Filter Include="Source Files\Model">
       <UniqueIdentifier>{732211b3-ba03-467e-b391-599e2c69e717}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Device">
+      <UniqueIdentifier>{c320382b-8eea-42cf-a9d0-7e35108651fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Device">
+      <UniqueIdentifier>{bfd88e99-1fc9-48bb-b349-3a25cf7214fd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Framework.cpp">
@@ -60,6 +66,9 @@
     <ClCompile Include="BaseModel.cpp">
       <Filter>Source Files\Model</Filter>
     </ClCompile>
+    <ClCompile Include="LogicalDevice.cpp">
+      <Filter>Source Files\Device</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.hpp">
@@ -73,6 +82,9 @@
     </ClInclude>
     <ClInclude Include="BaseModel.hpp">
       <Filter>Header Files\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="LogicalDevice.hpp">
+      <Filter>Header Files\Device</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

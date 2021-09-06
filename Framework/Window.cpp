@@ -1,5 +1,6 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "Window.hpp"
+#include "logicalDevice.hpp"
 
 /// <summary>
 /// Window constructor.
@@ -8,9 +9,8 @@
 /// 3. Enumerate vulkan extensions
 /// </summary>
 /// <param name="name"></param>
-Window::Window(const char * name)
+Window::Window()
 {
-	this->name = name;
 
 	// GLFW
 	this->initializeGLFW();
@@ -37,7 +37,7 @@ void Window::initVulkan() {
 	createCommandPool();
 	createCommandBuffers();
 	createSemaphores();
-	vkGetDeviceQueue(logicalDevice, 0, 0, &presentQueue);
+	vkGetDeviceQueue(logicalDevice.instance, 0, 0, &presentQueue);
 }
 
 void Window::createImageViews()
@@ -61,7 +61,7 @@ void Window::createImageViews()
 		createInfoImageView.subresourceRange.levelCount = 1;
 		createInfoImageView.subresourceRange.baseArrayLayer = 0;
 		createInfoImageView.subresourceRange.layerCount = 1;
-		if (vkCreateImageView(this->logicalDevice, &createInfoImageView, nullptr, &swapChainImageViews[i]) != VK_SUCCESS) {
+		if (vkCreateImageView(logicalDevice.instance, &createInfoImageView, nullptr, &swapChainImageViews[i]) != VK_SUCCESS) {
 			spdlog::critical("Couldn\'t create image views!");
 		}
 	}
@@ -139,16 +139,16 @@ void Window:: createSwapChain() {
 	createInfo.oldSwapchain = VK_NULL_HANDLE;
 
 
-	if (vkCreateSwapchainKHR(logicalDevice, &createInfo, nullptr, &swapChain) != VK_SUCCESS) {
+	if (vkCreateSwapchainKHR(logicalDevice.instance, &createInfo, nullptr, &swapChain) != VK_SUCCESS) {
 		spdlog::critical("Couldn\'t create swap chain!");
 	}
 
 
-	vkGetSwapchainImagesKHR(logicalDevice, swapChain, &imageCount, nullptr);
+	vkGetSwapchainImagesKHR(logicalDevice.instance, swapChain, &imageCount, nullptr);
 
 	spdlog::critical("{0}", imageCount);
 	swapChainImages.resize(imageCount);
-	vkGetSwapchainImagesKHR(logicalDevice, swapChain, &imageCount, swapChainImages.data());
+	vkGetSwapchainImagesKHR(logicalDevice.instance, swapChain, &imageCount, swapChainImages.data());
 
 	swapChainImageFormat = surfaceFormat.format;
 	swapChainExtent = extent;
@@ -238,28 +238,28 @@ void Window::populateDebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT
 Window::~Window()
 {
 	for (auto imageView : swapChainImageViews) {
-		vkDestroyImageView(this->logicalDevice, imageView, nullptr);
+		vkDestroyImageView(this->logicalDevice.instance, imageView, nullptr);
 	}
 
-	vkDestroyPipelineLayout(logicalDevice, pipelineLayout, nullptr);
-	vkDestroyPipeline(logicalDevice, graphicsPipeline, nullptr);
+	vkDestroyPipelineLayout(logicalDevice.instance, pipelineLayout, nullptr);
+	vkDestroyPipeline(logicalDevice.instance, graphicsPipeline, nullptr);
 
-	vkDestroyRenderPass(logicalDevice, renderPass, nullptr);
+	vkDestroyRenderPass(logicalDevice.instance, renderPass, nullptr);
 
 	for (auto framebuffer : swapChainFramebuffers) {
-		vkDestroyFramebuffer(logicalDevice, framebuffer, nullptr);
+		vkDestroyFramebuffer(logicalDevice.instance, framebuffer, nullptr);
 	}
 
-	vkDestroyCommandPool(logicalDevice, commandPool, nullptr);
+	vkDestroyCommandPool(logicalDevice.instance, commandPool, nullptr);
 
-	vkDestroyShaderModule(this->logicalDevice, fragShaderModule, nullptr);
-	vkDestroyShaderModule(this->logicalDevice, vertShaderModule, nullptr);
+	vkDestroyShaderModule(this->logicalDevice.instance, fragShaderModule, nullptr);
+	vkDestroyShaderModule(this->logicalDevice.instance, vertShaderModule, nullptr);
 
-	vkDestroySemaphore(logicalDevice, renderFinishedSemaphore, nullptr);
-	vkDestroySemaphore(logicalDevice, imageAvailableSemaphore, nullptr);
+	vkDestroySemaphore(logicalDevice.instance, renderFinishedSemaphore, nullptr);
+	vkDestroySemaphore(logicalDevice.instance, imageAvailableSemaphore, nullptr);
 
 	vkDestroySurfaceKHR(this->instance, this->surface, nullptr);
-	vkDestroyDevice(this->logicalDevice, nullptr);
+	vkDestroyDevice(this->logicalDevice.instance, nullptr);
 	if (enableValidationLayers) {
 		DestroyDebugUtilsMessengerEXT(this->instance, this->debugMessenger, nullptr);
 	}
@@ -535,11 +535,11 @@ void Window::createLogicalDevice()
 		createInfo.enabledLayerCount = 0;
 	}
 
-	if (vkCreateDevice(this->physicalDevice, &createInfo, nullptr, &this->logicalDevice) != VK_SUCCESS) {
+	if (vkCreateDevice(physicalDevice, &createInfo, nullptr,&logicalDevice.instance) != VK_SUCCESS) {
 		spdlog::critical("Couldn\'t!");
 	}
 
-	vkGetDeviceQueue(this->logicalDevice, 0, 0, &this->graphicsQueue);
+	vkGetDeviceQueue(logicalDevice.instance, 0, 0, &this->graphicsQueue);
 
 	spdlog::info("Successfully created a logical device");
 
@@ -682,7 +682,7 @@ void Window::createGraphicsPipeline() {
 	pipelineLayoutInfo.pushConstantRangeCount = 0; // Optional
 	pipelineLayoutInfo.pPushConstantRanges = nullptr; // Optional
 
-	if (vkCreatePipelineLayout(logicalDevice, &pipelineLayoutInfo, nullptr, &pipelineLayout) != VK_SUCCESS) {
+	if (vkCreatePipelineLayout(logicalDevice.instance, &pipelineLayoutInfo, nullptr, &pipelineLayout) != VK_SUCCESS) {
 		spdlog::critical("Couldn\'t!");
 	}
 
@@ -720,7 +720,7 @@ void Window::createGraphicsPipeline() {
 	pipelineInfo.basePipelineHandle = VK_NULL_HANDLE; // Optional
 	pipelineInfo.basePipelineIndex = -1; // Optional
 
-	if (vkCreateGraphicsPipelines(logicalDevice, VK_NULL_HANDLE, 1, &pipelineInfo, nullptr, &graphicsPipeline) != VK_SUCCESS) {
+	if (vkCreateGraphicsPipelines(logicalDevice.instance, VK_NULL_HANDLE, 1, &pipelineInfo, nullptr, &graphicsPipeline) != VK_SUCCESS) {
 		spdlog::critical("Couldn\'t!");
 	}
 
@@ -733,7 +733,7 @@ VkShaderModule Window::createShaderModule(const std::vector<char>& code) {
 	createInfo.pCode = reinterpret_cast<const uint32_t*>(code.data());
 
 	VkShaderModule shaderModule;
-	if (vkCreateShaderModule(this->logicalDevice, &createInfo, nullptr, &shaderModule) != VK_SUCCESS) {
+	if (vkCreateShaderModule(this->logicalDevice.instance, &createInfo, nullptr, &shaderModule) != VK_SUCCESS) {
 		spdlog::critical("Couldn\'t!");
 	}
 
@@ -774,7 +774,7 @@ void Window::createRenderPass()
 	renderPassInfo.subpassCount = 1;
 	renderPassInfo.pSubpasses = &subpass;
 
-	if (vkCreateRenderPass(logicalDevice, &renderPassInfo, nullptr, &renderPass) != VK_SUCCESS) {
+	if (vkCreateRenderPass(logicalDevice.instance, &renderPassInfo, nullptr, &renderPass) != VK_SUCCESS) {
 		spdlog::critical("Couldn\'t!");
 	}
 
@@ -798,7 +798,7 @@ void Window::createFramebuffers() {
 		framebufferInfo.height = swapChainExtent.height;
 		framebufferInfo.layers = 1;
 
-		if (vkCreateFramebuffer(logicalDevice, &framebufferInfo, nullptr, &swapChainFramebuffers[i]) != VK_SUCCESS) {
+		if (vkCreateFramebuffer(logicalDevice.instance, &framebufferInfo, nullptr, &swapChainFramebuffers[i]) != VK_SUCCESS) {
 			spdlog::critical("Couldn\'t!");
 		}
 	}
@@ -813,7 +813,7 @@ void Window::createCommandPool()
 	poolInfo.queueFamilyIndex = 0;
 	poolInfo.flags = 0; // Optional
 
-	if (vkCreateCommandPool(logicalDevice, &poolInfo, nullptr, &commandPool) != VK_SUCCESS) {
+	if (vkCreateCommandPool(logicalDevice.instance, &poolInfo, nullptr, &commandPool) != VK_SUCCESS) {
 		spdlog::critical("Couldn\'t!");
 	}
 }
@@ -828,7 +828,7 @@ void Window::createCommandBuffers()
 	allocInfo.level = VK_COMMAND_BUFFER_LEVEL_PRIMARY;
 	allocInfo.commandBufferCount = (uint32_t)commandBuffers.size();
 
-	if (vkAllocateCommandBuffers(logicalDevice, &allocInfo, commandBuffers.data()) != VK_SUCCESS) {
+	if (vkAllocateCommandBuffers(logicalDevice.instance, &allocInfo, commandBuffers.data()) != VK_SUCCESS) {
 		spdlog::critical("Couldn\'t!");
 	}
 
@@ -878,8 +878,8 @@ void Window::createSemaphores() {
 	VkSemaphoreCreateInfo semaphoreInfo{};
 	semaphoreInfo.sType = VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO;
 
-	if (vkCreateSemaphore(logicalDevice, &semaphoreInfo, nullptr, &imageAvailableSemaphore) != VK_SUCCESS ||
-		vkCreateSemaphore(logicalDevice, &semaphoreInfo, nullptr, &renderFinishedSemaphore) != VK_SUCCESS) {
+	if (vkCreateSemaphore(logicalDevice.instance, &semaphoreInfo, nullptr, &imageAvailableSemaphore) != VK_SUCCESS ||
+		vkCreateSemaphore(logicalDevice.instance, &semaphoreInfo, nullptr, &renderFinishedSemaphore) != VK_SUCCESS) {
 
 		spdlog::critical("Couldn\'t!");
 	}
@@ -888,7 +888,7 @@ void Window::createSemaphores() {
 void Window::drawFrame() 
 {
 	uint32_t imageIndex;
-	vkAcquireNextImageKHR(logicalDevice, swapChain, UINT64_MAX, imageAvailableSemaphore, VK_NULL_HANDLE, &imageIndex);
+	vkAcquireNextImageKHR(logicalDevice.instance, swapChain, UINT64_MAX, imageAvailableSemaphore, VK_NULL_HANDLE, &imageIndex);
 
 
 	spdlog::critical("{0}", imageIndex);
@@ -978,23 +978,23 @@ void Window::createImage(uint32_t width, uint32_t height, VkFormat format, VkIma
 	imageInfo.samples = VK_SAMPLE_COUNT_1_BIT;
 	imageInfo.sharingMode = VK_SHARING_MODE_EXCLUSIVE;
 
-	if (vkCreateImage(logicalDevice, &imageInfo, nullptr, &image) != VK_SUCCESS) {
+	if (vkCreateImage(logicalDevice.instance, &imageInfo, nullptr, &image) != VK_SUCCESS) {
 		throw std::runtime_error("failed to create image!");
 	}
 
 	VkMemoryRequirements memRequirements;
-	vkGetImageMemoryRequirements(logicalDevice, image, &memRequirements);
+	vkGetImageMemoryRequirements(logicalDevice.instance, image, &memRequirements);
 
 	VkMemoryAllocateInfo allocInfo{};
 	allocInfo.sType = VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO;
 	allocInfo.allocationSize = memRequirements.size;
 	allocInfo.memoryTypeIndex = findMemoryType(memRequirements.memoryTypeBits, properties);
 
-	if (vkAllocateMemory(logicalDevice, &allocInfo, nullptr, &imageMemory) != VK_SUCCESS) {
+	if (vkAllocateMemory(logicalDevice.instance, &allocInfo, nullptr, &imageMemory) != VK_SUCCESS) {
 		throw std::runtime_error("failed to allocate image memory!");
 	}
 
-	vkBindImageMemory(logicalDevice, image, imageMemory, 0);
+	vkBindImageMemory(logicalDevice.instance, image, imageMemory, 0);
 }
 
 void Window::createTextureImage() {
@@ -1011,9 +1011,9 @@ void Window::createTextureImage() {
 	createBuffer(imageSize, VK_BUFFER_USAGE_TRANSFER_SRC_BIT, VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT, stagingBuffer, stagingBufferMemory);
 
 	void* data;
-	vkMapMemory(logicalDevice, stagingBufferMemory, 0, imageSize, 0, &data);
+	vkMapMemory(logicalDevice.instance, stagingBufferMemory, 0, imageSize, 0, &data);
 	memcpy(data, pixels, static_cast<size_t>(imageSize));
-	vkUnmapMemory(logicalDevice, stagingBufferMemory);
+	vkUnmapMemory(logicalDevice.instance, stagingBufferMemory);
 
 	stbi_image_free(pixels);
 
@@ -1027,23 +1027,23 @@ void Window::createBuffer(VkDeviceSize size, VkBufferUsageFlags usage, VkMemoryP
 	bufferInfo.usage = usage;
 	bufferInfo.sharingMode = VK_SHARING_MODE_EXCLUSIVE;
 
-	if (vkCreateBuffer(logicalDevice, &bufferInfo, nullptr, &buffer) != VK_SUCCESS) {
+	if (vkCreateBuffer(logicalDevice.instance, &bufferInfo, nullptr, &buffer) != VK_SUCCESS) {
 		throw std::runtime_error("failed to create buffer!");
 	}
 
 	VkMemoryRequirements memRequirements;
-	vkGetBufferMemoryRequirements(logicalDevice, buffer, &memRequirements);
+	vkGetBufferMemoryRequirements(logicalDevice.instance, buffer, &memRequirements);
 
 	VkMemoryAllocateInfo allocInfo{};
 	allocInfo.sType = VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO;
 	allocInfo.allocationSize = memRequirements.size;
 	allocInfo.memoryTypeIndex = findMemoryType(memRequirements.memoryTypeBits, properties);
 
-	if (vkAllocateMemory(logicalDevice, &allocInfo, nullptr, &bufferMemory) != VK_SUCCESS) {
+	if (vkAllocateMemory(logicalDevice.instance, &allocInfo, nullptr, &bufferMemory) != VK_SUCCESS) {
 		throw std::runtime_error("failed to allocate buffer memory!");
 	}
 
-	vkBindBufferMemory(logicalDevice, buffer, bufferMemory, 0);
+	vkBindBufferMemory(logicalDevice.instance, buffer, bufferMemory, 0);
 }
 
 VkCommandBuffer Window:: beginSingleTimeCommands() {
@@ -1054,7 +1054,7 @@ VkCommandBuffer Window:: beginSingleTimeCommands() {
 	allocInfo.commandBufferCount = 1;
 
 	VkCommandBuffer commandBuffer;
-	vkAllocateCommandBuffers(logicalDevice, &allocInfo, &commandBuffer);
+	vkAllocateCommandBuffers(logicalDevice.instance, &allocInfo, &commandBuffer);
 
 	VkCommandBufferBeginInfo beginInfo{};
 	beginInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO;
@@ -1076,7 +1076,7 @@ void Window::endSingleTimeCommands(VkCommandBuffer commandBuffer) {
 	vkQueueSubmit(graphicsQueue, 1, &submitInfo, VK_NULL_HANDLE);
 	vkQueueWaitIdle(graphicsQueue);
 
-	vkFreeCommandBuffers(logicalDevice, commandPool, 1, &commandBuffer);
+	vkFreeCommandBuffers(logicalDevice.instance, commandPool, 1, &commandBuffer);
 }
 
 void Window::copyBuffer(VkBuffer srcBuffer, VkBuffer dstBuffer, VkDeviceSize size) {

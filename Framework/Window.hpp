@@ -13,7 +13,9 @@
 #include <algorithm> // Necessary for std::min/std::max
 #include <fstream>
 #include <tiny_obj_loader.h>
+#include "LogicalDevice.hpp"
 
+#define APPLICATION_NAME	"DEMOSCENE"
 
 struct Vertex {
 	glm::vec3 pos;
@@ -76,7 +78,7 @@ public:
 	QueueFamilyIndices findQueueFamilies(VkPhysicalDevice device);
 
 	// Constructor
-	Window(const char * name);
+	Window();
 
 	// Destructor
 	~Window();
@@ -115,7 +117,8 @@ public:
 
 private:
 
-	const char* name;
+	const char* name = APPLICATION_NAME;
+
 
 	void initializeGLFW();
 
@@ -177,7 +180,8 @@ private:
 
 	// Physical & Logical devices @todo(rename to physicalDevice & logicalDevice)
 	VkPhysicalDevice physicalDevice = VK_NULL_HANDLE;
-	VkDevice logicalDevice = VK_NULL_HANDLE;
+
+	LogicalDevice logicalDevice = LogicalDevice(physicalDevice);
 
 	// Queues
 	VkQueue graphicsQueue;
