@@ -1,7 +1,5 @@
 #pragma once
 
-#define GLFW_INCLUDE_VULKAN
-#include <GLFW/glfw3.h>
 #include <stdio.h>
 #include <glm/glm.hpp>
 #include <vector>
@@ -25,6 +23,7 @@
 #include "DebugHelpers.hpp"
 #include "DebugCallbacks.hpp"
 #include "DebugMessenger.hpp"
+#include "GLFW.hpp"
 
 struct Vertex {
 	glm::vec3 pos;
@@ -82,13 +81,8 @@ public:
 private:
 
 	// GlFW window
-	GLFWwindow* window;
+	GLFW glfw;
 
-	// Window title
-	const char* name = APPLICATION_NAME;
-
-
-	void initializeGLFW();
 
 	// Helper functions to decide if physical device is suitable for the application
 	// And to find queue families.

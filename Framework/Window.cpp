@@ -4,44 +4,13 @@
 
 Window::Window()
 {
-	// GLFW
-	initializeGLFW();
+
 
 }
 
 Window::~Window()
 {
-	glfwDestroyWindow(this->window);
-	glfwTerminate();
-}
 
-void Window::initializeGLFW()
-{
-	spdlog::info("Trying to create a GLFW Window..");
-
-	// Initialize GLFW lib
-	glfwInit();
-
-	// Don't use openGL and don't allow window resizing
-	glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
-	glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
-
-	// Assign & create the window
-	this->window = glfwCreateWindow(
-		WINDOW_W,
-		WINDOW_H,
-		name,
-		nullptr, // 1 monitor windowed for now..
-		nullptr // don't share context
-	);
-
-	if (!this->window)
-	{
-		spdlog::critical("Couldn\'t create GLFW window");
-		return;
-	}
-
-	spdlog::info("Successfully Created a GLFW Window!");
 }
 
 
@@ -75,7 +44,8 @@ void Window::initVulkan() {
 */
 void Window::loop()
 {
-	while (!glfwWindowShouldClose(window)) 
+	/**/
+	while (!glfwWindowShouldClose(glfw.window)) 
 	{
 		glfwPollEvents();
 	}

@@ -97,6 +97,12 @@
     <Filter Include="Source Files\Vulkan\Debug">
       <UniqueIdentifier>{00c12bdf-facb-4fda-885d-5eb54c0e862d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\GLFW">
+      <UniqueIdentifier>{832e4261-14d5-49da-b3d5-f30098a1399d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GLFW">
+      <UniqueIdentifier>{b115f093-1003-443a-939f-ccccae387c86}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -140,6 +146,9 @@
     </ClCompile>
     <ClCompile Include="Vulkan.cpp">
       <Filter>Source Files\Vulkan</Filter>
+    </ClCompile>
+    <ClCompile Include="GLFW.cpp">
+      <Filter>Source Files\GLFW</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -187,6 +196,9 @@
     </ClInclude>
     <ClInclude Include="Vulkan.hpp">
       <Filter>Header Files\Vulkan</Filter>
+    </ClInclude>
+    <ClInclude Include="GLFW.hpp">
+      <Filter>Header Files\GLFW</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
