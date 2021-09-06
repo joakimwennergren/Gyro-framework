@@ -149,6 +149,7 @@
   <ItemGroup>
     <ClCompile Include="DebugCallbacks.cpp" />
     <ClCompile Include="DebugHelpers.cpp" />
+    <ClCompile Include="DebugMessenger.cpp" />
     <ClCompile Include="VulkanExtension.cpp" />
     <ClCompile Include="File.cpp" />
     <ClCompile Include="VulkanInstance.cpp" />
@@ -164,6 +165,7 @@
     <ClInclude Include="DebugCallbacks.hpp" />
     <ClInclude Include="Configuration.hpp" />
     <ClInclude Include="DebugHelpers.hpp" />
+    <ClInclude Include="DebugMessenger.hpp" />
     <ClInclude Include="VulkanExtension.hpp" />
     <ClInclude Include="File.hpp" />
     <ClInclude Include="Framework.hpp" />

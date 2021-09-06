@@ -24,7 +24,7 @@
 #include "VulkanInstance.hpp"
 #include "DebugHelpers.hpp"
 #include "DebugCallbacks.hpp"
-
+#include "DebugMessenger.hpp"
 
 struct Vertex {
 	glm::vec3 pos;
@@ -82,27 +82,12 @@ public:
 	void loop();
 
 
-
-	static std::vector<char> readFile(const std::string& filename) {
-		std::ifstream file(filename, std::ios::ate | std::ios::binary);
-
-		if (!file.is_open()) {
-			spdlog::critical("Failed to open file!");
-		}
-
-		size_t fileSize = (size_t)file.tellg();
-		std::vector<char> buffer(fileSize);
-
-		file.seekg(0);
-		file.read(buffer.data(), fileSize);
-
-		file.close();
-
-		return buffer;
-	}
-
 private:
 
+	// GlFW window
+	GLFWwindow* window;
+
+	// Window title
 	const char* name = APPLICATION_NAME;
 
 
@@ -115,27 +100,6 @@ private:
 	VkSurfaceFormatKHR chooseSwapSurfaceFormat(const std::vector<VkSurfaceFormatKHR>& availableFormats);
 	VkPresentModeKHR chooseSwapPresentMode(const std::vector<VkPresentModeKHR>& availablePresentModes);
 	VkExtent2D chooseSwapExtent(const VkSurfaceCapabilitiesKHR& capabilities);
-
-
-	bool checkValidationLayerSupport();
-
-	// Vulkan
-	void createVulkanInstance();
-	void enumerateVulkanExtensions();
-	void enumeratePhysicalDevices();
-	void createLogicalDevice();
-
-	// GlFW window
-	GLFWwindow* window;
-
-	// Vulkan instance
-	const std::vector<const char*> validationLayers = {
-		"VK_LAYER_KHRONOS_validation"
-	};
-
-	const std::vector<const char*> deviceExtensions = {
-		VK_KHR_SWAPCHAIN_EXTENSION_NAME
-	};
 
 	VkResult CreateDebugUtilsMessengerEXT(
 		VkInstance instance,
@@ -153,14 +117,6 @@ private:
 	);
 
 
-#ifdef NDEBUG
-	const bool enableValidationLayers = false;
-#else
-	const bool enableValidationLayers = true;
-#endif
-
-	std::vector<const char*> getRequiredExtensions();
-
 	// Physical & Logical devices @todo(rename to physicalDevice & logicalDevice)
 	PhysicalDevice physicalDevice = PhysicalDevice();
 	LogicalDevice logicalDevice = LogicalDevice();
@@ -175,8 +131,7 @@ private:
 	// Swap Chain
 	VkSwapchainKHR swapChain;
 
-	// Debugging
-	VkDebugUtilsMessengerEXT debugMessenger;
+	VulkanDebugMessenger vulkanDebugMessenger;
 
 	std::vector<VkImage> swapChainImages;
 	VkFormat swapChainImageFormat;

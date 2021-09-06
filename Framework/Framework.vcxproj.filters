@@ -135,6 +135,9 @@
     <ClCompile Include="DebugCallbacks.cpp">
       <Filter>Source Files\Vulkan\Debug</Filter>
     </ClCompile>
+    <ClCompile Include="DebugMessenger.cpp">
+      <Filter>Source Files\Vulkan\Debug</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.hpp">
@@ -175,6 +178,9 @@
     </ClInclude>
     <ClInclude Include="DebugHelpers.hpp">
       <Filter>Header Files\Helpers\Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugMessenger.hpp">
+      <Filter>Header Files\Vulkan\Debug</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

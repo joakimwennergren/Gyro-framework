@@ -83,28 +83,14 @@ void Window::initializeGLFW()
 	spdlog::info("Successfully Created a GLFW Window!");
 }
 
-void Window::setupDebugMessenger() {
-	if (!enableValidationLayers) return;
 
-	VulkanInstance* vkInstance = vkInstance->getInstance();
-
-
-	VkDebugUtilsMessengerCreateInfoEXT createInfo;
-	createInfo.sType = VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT;
-	createInfo.pNext = nullptr;
-	createInfo.flags = 0;
-	createInfo.messageSeverity = VK_DEBUG_UTILS_MESSAGE_SEVERITY_VERBOSE_BIT_EXT | VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT | VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT;
-	createInfo.messageType = VK_DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT | VK_DEBUG_UTILS_MESSAGE_TYPE_VALIDATION_BIT_EXT | VK_DEBUG_UTILS_MESSAGE_TYPE_PERFORMANCE_BIT_EXT;
-	createInfo.pfnUserCallback = DebugCallbacks::debugCallback;
-
-	if (DebugHelpers::CreateDebugUtilsMessengerEXT(vkInstance->getVulkanInstance(), &createInfo, nullptr, &debugMessenger) != VK_SUCCESS) {
-		spdlog::critical("Failed to create debug utils messenger!");
-	}
-}
 
 void Window::initVulkan() {
 
-	setupDebugMessenger();
+#if ENABLE_VALIDATION_LAYERS
+	// Set up validation layers & debugging..
+	vulkanDebugMessenger.Initialize();
+#endif
 	
 	// Create physical and logical devices..
 	physicalDevice.Initialize();
@@ -330,48 +316,6 @@ Window::QueueFamilyIndices Window::findQueueFamilies(VkPhysicalDevice device) {
 	return indices;
 }
 
-
-
-void Window::enumerateVulkanExtensions()
-{
-	spdlog::info("Enumerating vulkan extensions..");
-
-	uint32_t extensionCount = 0;
-	vkEnumerateInstanceExtensionProperties(nullptr, &extensionCount, nullptr);
-
-	std::vector<VkExtensionProperties> extensions(extensionCount);
-
-	vkEnumerateInstanceExtensionProperties(nullptr, &extensionCount, extensions.data());
-
-	for (const auto& extension : extensions) {
-		spdlog::info("{0}, version: {1}", extension.extensionName, extension.specVersion);
-	}
-}
-
-std::vector<const char*> Window::getRequiredExtensions() {
-	uint32_t glfwExtensionCount = 0;
-	const char** glfwExtensions;
-	glfwExtensions = glfwGetRequiredInstanceExtensions(&glfwExtensionCount);
-
-	std::vector<const char*> extensions(glfwExtensions, glfwExtensions + glfwExtensionCount);
-
-	if (enableValidationLayers) {
-		extensions.push_back(VK_EXT_DEBUG_UTILS_EXTENSION_NAME);
-	}
-
-	return extensions;
-}
-
-
-
-
-
-void Window::DestroyDebugUtilsMessengerEXT(VkInstance instance, VkDebugUtilsMessengerEXT debugMessenger, const VkAllocationCallbacks* pAllocator) {
-	auto func = (PFN_vkDestroyDebugUtilsMessengerEXT)vkGetInstanceProcAddr(instance, "vkDestroyDebugUtilsMessengerEXT");
-	if (func != nullptr) {
-		func(instance, debugMessenger, pAllocator);
-	}
-}
 
 
 SwapChainSupportDetails Window::querySwapChainSupport(VkPhysicalDevice device) {
