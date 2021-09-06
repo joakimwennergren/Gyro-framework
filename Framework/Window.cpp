@@ -3,6 +3,7 @@
 #include "logicalDevice.hpp"
 #include "ValidationLayer.hpp"
 #include "Configuration.hpp"
+#include "File.hpp"
 
 /// <summary>
 /// Window constructor.
@@ -548,8 +549,8 @@ SwapChainSupportDetails Window::querySwapChainSupport(VkPhysicalDevice device) {
 
 
 void Window::createGraphicsPipeline() {
-	auto vertShaderCode = readFile("vert.spv");
-	auto fragShaderCode = readFile("frag.spv");
+	auto vertShaderCode = File::readFile("vert.spv");
+	auto fragShaderCode = File::readFile("frag.spv");
 
 	vertShaderModule = createShaderModule(vertShaderCode);
 	fragShaderModule = createShaderModule(fragShaderCode);

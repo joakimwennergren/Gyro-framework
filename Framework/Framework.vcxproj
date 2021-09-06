@@ -147,6 +147,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="File.cpp" />
     <ClCompile Include="Framework.cpp" />
     <ClCompile Include="BaseModel.cpp" />
     <ClCompile Include="LogicalDevice.cpp" />
@@ -156,6 +157,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Configuration.hpp" />
+    <ClInclude Include="File.hpp" />
     <ClInclude Include="Framework.hpp" />
     <ClInclude Include="BaseModel.hpp" />
     <ClInclude Include="LogicalDevice.hpp" />

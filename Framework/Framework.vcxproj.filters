@@ -67,6 +67,12 @@
     <Filter Include="Header Files\Configuration">
       <UniqueIdentifier>{0add5750-894d-4570-bbbd-be2c9252f359}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Utility">
+      <UniqueIdentifier>{deeab6ed-d19d-4ebe-ba6b-77dbb6511a2e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Utility">
+      <UniqueIdentifier>{eafd4908-a6e1-452c-b9a3-4615098c7170}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Framework.cpp">
@@ -86,6 +92,9 @@
     </ClCompile>
     <ClCompile Include="ValidationLayer.cpp">
       <Filter>Source Files\Vulkan\ValidationLayer</Filter>
+    </ClCompile>
+    <ClCompile Include="File.cpp">
+      <Filter>Source Files\Utility</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -109,6 +118,9 @@
     </ClInclude>
     <ClInclude Include="Configuration.hpp">
       <Filter>Header Files\Configuration</Filter>
+    </ClInclude>
+    <ClInclude Include="File.hpp">
+      <Filter>Header Files\Utility</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

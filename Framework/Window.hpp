@@ -14,8 +14,8 @@
 #include <fstream>
 #include <tiny_obj_loader.h>
 #include "LogicalDevice.hpp"
-
-#define APPLICATION_NAME	"DEMOSCENE"
+#include "stb_image.h"
+#include "Configuration.hpp"
 
 struct Vertex {
 	glm::vec3 pos;
@@ -34,26 +34,14 @@ struct Vertex {
 	}
 };
 
-#include "stb_image.h"
-
-const uint32_t WIDTH = 800;
-const uint32_t HEIGHT = 600;
-
 const std::string MODEL_PATH = "models/viking_room.obj";
 const std::string TEXTURE_PATH = "textures/viking_room.png";
-
-#define WINDOW_W	800
-#define WINDOW_H	600
 
 struct SwapChainSupportDetails {
 	VkSurfaceCapabilitiesKHR capabilities;
 	std::vector<VkSurfaceFormatKHR> formats;
 	std::vector<VkPresentModeKHR> presentModes;
 };
-
-
-
-
 
 
 class Window
@@ -83,7 +71,6 @@ public:
 	// Destructor
 	~Window();
 
-	// Handle basic events such as window resizing, closing the window etc..
 	void loop();
 
 	static VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(
