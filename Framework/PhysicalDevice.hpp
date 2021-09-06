@@ -5,7 +5,7 @@
 class PhysicalDevice 
 {
 public:
-	void enumeratePhysicalDevices();
+	void Initialize();
 	VkPhysicalDevice device = VK_NULL_HANDLE;
 protected:
 private:

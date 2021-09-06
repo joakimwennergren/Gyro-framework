@@ -51,10 +51,10 @@ class VulkanInstance {
 
 		
 		if (vkCreateInstance(&createInfo, nullptr, &vkInstance) != VK_SUCCESS) {
-			spdlog::info("Failed to create a vulkan instance.");
+			spdlog::info("Failed to initialize a vulkan instance.");
 		}
 
-		spdlog::info("Successfully Created a vulkan instance!");
+		spdlog::info("Successfully initialized a vulkan instance!");
 
     }
 

@@ -6,13 +6,14 @@
 #include <glm/glm.hpp>
 #include <vector>
 #include <iostream>
+#include <cstdint> 
 #include <optional>
-#include "spdlog/spdlog.h"
 #include <set>
-#include <cstdint> // Necessary for UINT32_MAX
-#include <algorithm> // Necessary for std::min/std::max
+#include <algorithm> 
 #include <fstream>
 #include <tiny_obj_loader.h>
+
+#include "spdlog/spdlog.h"
 #include "LogicalDevice.hpp"
 #include "PhysicalDevice.hpp"
 #include "stb_image.h"

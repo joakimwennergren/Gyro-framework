@@ -1,9 +1,9 @@
 #include "PhysicalDevice.hpp"
 #include "VulkanInstance.hpp"
 
-void PhysicalDevice::enumeratePhysicalDevices()
+
+void PhysicalDevice::Initialize()
 {
-	
 	spdlog::info("Enumerating physical devices(video cards)..");
 
 	uint32_t deviceCount = 0;
@@ -25,6 +25,5 @@ void PhysicalDevice::enumeratePhysicalDevices()
 		break;
 	}
 
-	spdlog::info("Found {0} device(s)!", deviceCount);
-	
+	spdlog::info("Found {0} device(s) selecting this or first device found!", deviceCount);
 }

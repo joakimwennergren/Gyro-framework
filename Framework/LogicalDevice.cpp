@@ -1,15 +1,25 @@
 #include "LogicalDevice.hpp"
+#include "Configuration.hpp"
 
 LogicalDevice::LogicalDevice()
 {
-	/*
+
+}
+
+LogicalDevice::~LogicalDevice()
+{
+
+}
+
+void LogicalDevice::Initialize(PhysicalDevice physicalDevice)
+{
+
 	// Sanity check
-	if (physicalDevice ==  VK_NULL_HANDLE)
+	if (physicalDevice.device == VK_NULL_HANDLE)
 	{
 		spdlog::critical("Trying to initialize a logical device with an null handle physical device!");
 		return;
 	}
-	*/
 
 	spdlog::info("Trying to initialize a logical device..");
 
@@ -25,7 +35,6 @@ LogicalDevice::LogicalDevice()
 	// Device Features
 	VkPhysicalDeviceFeatures deviceFeatures{};
 
-	/*
 	// Create information
 	VkDeviceCreateInfo createInfo{};
 	createInfo.sType = VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO;
@@ -36,20 +45,18 @@ LogicalDevice::LogicalDevice()
 	createInfo.ppEnabledExtensionNames = deviceExtensions.data();
 
 	// Should we use validation layers or not
-	if (enableValidationLayers) {
-		createInfo.enabledLayerCount = static_cast<uint32_t>(validationLayers.size());
-		createInfo.ppEnabledLayerNames = validationLayers.data();
-	}
-	else {
-		createInfo.enabledLayerCount = 0;
-	}
+#if ENABLE_VALIDATION_LAYERS == true
+	createInfo.enabledLayerCount = static_cast<uint32_t>(validationLayers.size());
+	createInfo.ppEnabledLayerNames = validationLayers.data();
+#else
+	createInfo.enabledLayerCount = 0;
+#endif
 
 	// Create the logical device
-	if (vkCreateDevice(physicalDevice, &createInfo, nullptr, &instance) != VK_SUCCESS) {
+	if (vkCreateDevice(physicalDevice.device, &createInfo, nullptr, &device) != VK_SUCCESS) {
 		spdlog::critical("Couldn\'t initialize a logical device!");
 		return;
 	}
-	*/
 
 	spdlog::info("Successfully initialized a logical device");
 }

@@ -91,6 +91,8 @@ void Window::setupDebugMessenger() {
 
 	VkDebugUtilsMessengerCreateInfoEXT createInfo;
 	createInfo.sType = VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT;
+	createInfo.pNext = nullptr;
+	createInfo.flags = 0;
 	createInfo.messageSeverity = VK_DEBUG_UTILS_MESSAGE_SEVERITY_VERBOSE_BIT_EXT | VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT | VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT;
 	createInfo.messageType = VK_DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT | VK_DEBUG_UTILS_MESSAGE_TYPE_VALIDATION_BIT_EXT | VK_DEBUG_UTILS_MESSAGE_TYPE_PERFORMANCE_BIT_EXT;
 	createInfo.pfnUserCallback = DebugCallbacks::debugCallback;
@@ -101,10 +103,14 @@ void Window::setupDebugMessenger() {
 }
 
 void Window::initVulkan() {
+
 	setupDebugMessenger();
+	
+	// Create physical and logical devices..
+	physicalDevice.Initialize();
+	logicalDevice.Initialize(physicalDevice);
 
 	/*
-	createLogicalDevice();
 	createSwapChain();
 	createImageViews();
 	createRenderPass();
@@ -285,25 +291,6 @@ VkExtent2D Window::chooseSwapExtent(const VkSurfaceCapabilitiesKHR& capabilities
 
 
 
-
-
-
-bool Window::checkDeviceExtensionSupport(VkPhysicalDevice device) {
-	uint32_t extensionCount;
-	vkEnumerateDeviceExtensionProperties(device, nullptr, &extensionCount, nullptr);
-
-	std::vector<VkExtensionProperties> availableExtensions(extensionCount);
-	vkEnumerateDeviceExtensionProperties(device, nullptr, &extensionCount, availableExtensions.data());
-
-	std::set<std::string> requiredExtensions(deviceExtensions.begin(), deviceExtensions.end());
-
-	for (const auto& extension : availableExtensions) {
-		requiredExtensions.erase(extension.extensionName);
-	}
-
-	return requiredExtensions.empty();
-}
-
 bool Window::isDeviceSuitable(VkPhysicalDevice device) {
 	QueueFamilyIndices indices = findQueueFamilies(device);
 
@@ -386,52 +373,6 @@ void Window::DestroyDebugUtilsMessengerEXT(VkInstance instance, VkDebugUtilsMess
 	}
 }
 
-
-void Window::createLogicalDevice()
-{
-	spdlog::info("Trying to create a logical device");
-
-	QueueFamilyIndices indices = findQueueFamilies(physicalDevice.device);
-
-	VkDeviceQueueCreateInfo queueCreateInfo{};
-	queueCreateInfo.sType = VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO;
-	queueCreateInfo.queueFamilyIndex = 0;
-	queueCreateInfo.queueCount = 1;
-
-	float queuePriority = 1.0f;
-	queueCreateInfo.pQueuePriorities = &queuePriority;
-
-	VkPhysicalDeviceFeatures deviceFeatures{};
-
-	VkDeviceCreateInfo createInfo{};
-	createInfo.sType = VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO;
-
-	createInfo.pQueueCreateInfos = &queueCreateInfo;
-	createInfo.queueCreateInfoCount = 1;
-
-	createInfo.pEnabledFeatures = &deviceFeatures;
-
-	createInfo.enabledExtensionCount = static_cast<uint32_t>(deviceExtensions.size());
-	createInfo.ppEnabledExtensionNames = deviceExtensions.data();
-
-	const bool enableValidationLayers = false;
-	if (enableValidationLayers) {
-		createInfo.enabledLayerCount = static_cast<uint32_t>(validationLayers.size());
-		createInfo.ppEnabledLayerNames = validationLayers.data();
-	}
-	else {
-		createInfo.enabledLayerCount = 0;
-	}
-
-	if (vkCreateDevice(physicalDevice.device, &createInfo, nullptr,&logicalDevice.device) != VK_SUCCESS) {
-		spdlog::critical("Couldn\'t!");
-	}
-
-	vkGetDeviceQueue(logicalDevice.device, 0, 0, &this->graphicsQueue);
-
-	spdlog::info("Successfully created a logical device");
-
-}
 
 SwapChainSupportDetails Window::querySwapChainSupport(VkPhysicalDevice device) {
 	SwapChainSupportDetails details;
