@@ -22,12 +22,6 @@
     <Filter Include="Shaders">
       <UniqueIdentifier>{2deb39e2-8cf4-49e3-ada8-339713e1cef2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Models">
-      <UniqueIdentifier>{0ccad8c0-ecf7-4a88-8ddb-12b1916e031c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Textures">
-      <UniqueIdentifier>{176b25aa-25e0-476d-8345-c270397e60a8}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Helpers">
       <UniqueIdentifier>{581264f9-6ddc-4421-a910-015ce908e8f6}</UniqueIdentifier>
     </Filter>
@@ -51,6 +45,12 @@
     </Filter>
     <Filter Include="Source Files\Device">
       <UniqueIdentifier>{bfd88e99-1fc9-48bb-b349-3a25cf7214fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Textures">
+      <UniqueIdentifier>{176b25aa-25e0-476d-8345-c270397e60a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Models">
+      <UniqueIdentifier>{0ccad8c0-ecf7-4a88-8ddb-12b1916e031c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -100,7 +100,7 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\..\Desktop\viking_room.png">
-      <Filter>Textures</Filter>
+      <Filter>Resource Files\Textures</Filter>
     </Image>
   </ItemGroup>
 </Project>

@@ -146,7 +146,6 @@ void Window:: createSwapChain() {
 
 	vkGetSwapchainImagesKHR(logicalDevice.instance, swapChain, &imageCount, nullptr);
 
-	spdlog::critical("{0}", imageCount);
 	swapChainImages.resize(imageCount);
 	vkGetSwapchainImagesKHR(logicalDevice.instance, swapChain, &imageCount, swapChainImages.data());
 
@@ -890,8 +889,6 @@ void Window::drawFrame()
 	uint32_t imageIndex;
 	vkAcquireNextImageKHR(logicalDevice.instance, swapChain, UINT64_MAX, imageAvailableSemaphore, VK_NULL_HANDLE, &imageIndex);
 
-
-	spdlog::critical("{0}", imageIndex);
 	VkSubmitInfo submitInfo{};
 	submitInfo.sType = VK_STRUCTURE_TYPE_SUBMIT_INFO;
 
