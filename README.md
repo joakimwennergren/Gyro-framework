@@ -18,9 +18,8 @@ https://github.com/alaingalvan/CrossWindow
 * [X] Create an opengl context window
 * [X] Bind vulkan to it
 * [X] Decide on what GPU/3D API to use (I choose you, vulkan! why? because you can optimize and have greater control over everything)
-* https://alain.xyz/blog/comparison-of-modern-graphics-apis
-* [] Clean vulkan warnings/errors 
-* [] Restructure code
+* [ ] Clean vulkan warnings/errors 
+* [ ] Restructure code
 
 ## Resources
 
@@ -43,6 +42,7 @@ might be good for inspiration regarding drawing functions etc.
 ### Findings
 * Creating a regular old win32 window doesnt cut it. You need to create the window with https://www.glfw.org/. Vulkan on it's own cant do this.
 * When a window is created a vulkan instance is then created and bound to the window if i understand correctly.
+* https://alain.xyz/blog/comparison-of-modern-graphics-apis
 
 ### Similar projects
 * https://github.com/mosra/magnum
