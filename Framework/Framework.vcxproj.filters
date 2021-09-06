@@ -19,9 +19,6 @@
     <Filter Include="Source Files\Window">
       <UniqueIdentifier>{b66fb85a-48c1-4be3-a8c8-9efecd4fe5d2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Shaders">
-      <UniqueIdentifier>{2deb39e2-8cf4-49e3-ada8-339713e1cef2}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Helpers">
       <UniqueIdentifier>{581264f9-6ddc-4421-a910-015ce908e8f6}</UniqueIdentifier>
     </Filter>
@@ -49,17 +46,11 @@
     <Filter Include="Header Files\Vulkan">
       <UniqueIdentifier>{cae03d21-07ef-4453-8bc7-a3f995e8e942}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Vulkan\Device">
-      <UniqueIdentifier>{c320382b-8eea-42cf-a9d0-7e35108651fa}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Vulkan\ValidationLayer">
       <UniqueIdentifier>{af49d8be-9329-4be5-833d-58986460e8e2}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Vulkan">
       <UniqueIdentifier>{12215eb2-e427-4e7e-974e-d4dd9cf3382a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Vulkan\Device">
-      <UniqueIdentifier>{bfd88e99-1fc9-48bb-b349-3a25cf7214fd}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Vulkan\ValidationLayer">
       <UniqueIdentifier>{ed873418-0d69-43a7-93d3-43c0eb490d81}</UniqueIdentifier>
@@ -73,9 +64,42 @@
     <Filter Include="Source Files\Utility">
       <UniqueIdentifier>{eafd4908-a6e1-452c-b9a3-4615098c7170}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\Shaders">
+      <UniqueIdentifier>{2deb39e2-8cf4-49e3-ada8-339713e1cef2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Vulkan\Devices">
+      <UniqueIdentifier>{c320382b-8eea-42cf-a9d0-7e35108651fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Vulkan\Devices">
+      <UniqueIdentifier>{bfd88e99-1fc9-48bb-b349-3a25cf7214fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Vulkan\Instances">
+      <UniqueIdentifier>{f1133a29-27e8-4993-b92b-ec0454f5618e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Vulkan\Instances">
+      <UniqueIdentifier>{f56f58f4-dc41-4603-a3cd-8157dd137355}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Vulkan\Extensions">
+      <UniqueIdentifier>{6beb83cf-018d-44d9-ae03-926b7c28fa3a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Vulkan\Extension">
+      <UniqueIdentifier>{2b7c2a15-6be7-4276-9e6e-3a0ba9b63bb5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Vulkan\Debug">
+      <UniqueIdentifier>{df35fd79-51db-4161-b173-2da9bb70ca80}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Helpers\Debug">
+      <UniqueIdentifier>{eeeb5467-feaa-496a-82a2-aceb5c4461e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Helpers\Debug">
+      <UniqueIdentifier>{6134e84f-71b7-4f3f-9dc5-06f3cecee04c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Vulkan\Debug">
+      <UniqueIdentifier>{00c12bdf-facb-4fda-885d-5eb54c0e862d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Framework.cpp">
+    <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Window.cpp">
@@ -88,13 +112,28 @@
       <Filter>Source Files\Model</Filter>
     </ClCompile>
     <ClCompile Include="LogicalDevice.cpp">
-      <Filter>Source Files\Vulkan\Device</Filter>
+      <Filter>Source Files\Vulkan\Devices</Filter>
     </ClCompile>
     <ClCompile Include="ValidationLayer.cpp">
       <Filter>Source Files\Vulkan\ValidationLayer</Filter>
     </ClCompile>
     <ClCompile Include="File.cpp">
       <Filter>Source Files\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicalDevice.cpp">
+      <Filter>Source Files\Vulkan\Devices</Filter>
+    </ClCompile>
+    <ClCompile Include="VulkanInstance.cpp">
+      <Filter>Source Files\Vulkan\Instances</Filter>
+    </ClCompile>
+    <ClCompile Include="VulkanExtension.cpp">
+      <Filter>Source Files\Vulkan\Extension</Filter>
+    </ClCompile>
+    <ClCompile Include="DebugHelpers.cpp">
+      <Filter>Source Files\Helpers\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="DebugCallbacks.cpp">
+      <Filter>Source Files\Vulkan\Debug</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -111,7 +150,7 @@
       <Filter>Header Files\Model</Filter>
     </ClInclude>
     <ClInclude Include="LogicalDevice.hpp">
-      <Filter>Header Files\Vulkan\Device</Filter>
+      <Filter>Header Files\Vulkan\Devices</Filter>
     </ClInclude>
     <ClInclude Include="ValidationLayer.hpp">
       <Filter>Header Files\Vulkan\ValidationLayer</Filter>
@@ -122,21 +161,31 @@
     <ClInclude Include="File.hpp">
       <Filter>Header Files\Utility</Filter>
     </ClInclude>
+    <ClInclude Include="PhysicalDevice.hpp">
+      <Filter>Header Files\Vulkan\Devices</Filter>
+    </ClInclude>
+    <ClInclude Include="VulkanInstance.hpp">
+      <Filter>Header Files\Vulkan\Instances</Filter>
+    </ClInclude>
+    <ClInclude Include="VulkanExtension.hpp">
+      <Filter>Header Files\Vulkan\Extensions</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugCallbacks.hpp">
+      <Filter>Header Files\Vulkan\Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugHelpers.hpp">
+      <Filter>Header Files\Helpers\Debug</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Shader.vert">
-      <Filter>Shaders</Filter>
+      <Filter>Resource Files\Shaders</Filter>
     </None>
     <None Include="Shader.frag">
-      <Filter>Shaders</Filter>
+      <Filter>Resource Files\Shaders</Filter>
     </None>
     <None Include="compile_shader.bat">
-      <Filter>Shaders</Filter>
+      <Filter>Resource Files\Shaders</Filter>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="..\..\..\..\Desktop\viking_room.png">
-      <Filter>Resource Files\Textures</Filter>
-    </Image>
   </ItemGroup>
 </Project>

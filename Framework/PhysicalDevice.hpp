@@ -2,13 +2,11 @@
 #include <vulkan/vulkan.hpp>
 #include "spdlog/spdlog.h"
 
-class LogicalDevice
+class PhysicalDevice 
 {
 public:
-	LogicalDevice();
-	VkDevice device;
+	void enumeratePhysicalDevices();
+	VkPhysicalDevice device = VK_NULL_HANDLE;
 protected:
-
 private:
-
 };

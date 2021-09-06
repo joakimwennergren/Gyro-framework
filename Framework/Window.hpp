@@ -14,8 +14,16 @@
 #include <fstream>
 #include <tiny_obj_loader.h>
 #include "LogicalDevice.hpp"
+#include "PhysicalDevice.hpp"
 #include "stb_image.h"
 #include "Configuration.hpp"
+#include "logicalDevice.hpp"
+#include "ValidationLayer.hpp"
+#include "File.hpp"
+#include "VulkanInstance.hpp"
+#include "DebugHelpers.hpp"
+#include "DebugCallbacks.hpp"
+
 
 struct Vertex {
 	glm::vec3 pos;
@@ -47,7 +55,6 @@ struct SwapChainSupportDetails {
 class Window
 {
 public:
-	void loadModel();
 
 	uint32_t findMemoryType(uint32_t typeFilter, VkMemoryPropertyFlags properties);
 	void createTextureImage();
@@ -73,16 +80,7 @@ public:
 
 	void loop();
 
-	static VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(
-		VkDebugUtilsMessageSeverityFlagBitsEXT messageSeverity,
-		VkDebugUtilsMessageTypeFlagsEXT messageType,
-		const VkDebugUtilsMessengerCallbackDataEXT* pCallbackData,
-		void* pUserData) {
 
-		std::cerr << "validation layer: " << pCallbackData->pMessage << std::endl;
-
-		return VK_FALSE;
-	}
 
 	static std::vector<char> readFile(const std::string& filename) {
 		std::ifstream file(filename, std::ios::ate | std::ios::binary);
@@ -130,8 +128,6 @@ private:
 	GLFWwindow* window;
 
 	// Vulkan instance
-	VkInstance instance;
-
 	const std::vector<const char*> validationLayers = {
 		"VK_LAYER_KHRONOS_validation"
 	};
@@ -155,7 +151,6 @@ private:
 		const VkAllocationCallbacks* pAllocator
 	);
 
-	void populateDebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT& createInfo);
 
 #ifdef NDEBUG
 	const bool enableValidationLayers = false;
@@ -166,9 +161,8 @@ private:
 	std::vector<const char*> getRequiredExtensions();
 
 	// Physical & Logical devices @todo(rename to physicalDevice & logicalDevice)
-	VkPhysicalDevice physicalDevice = VK_NULL_HANDLE;
-
-	LogicalDevice logicalDevice = LogicalDevice(physicalDevice);
+	PhysicalDevice physicalDevice = PhysicalDevice();
+	LogicalDevice logicalDevice = LogicalDevice();
 
 	// Queues
 	VkQueue graphicsQueue;

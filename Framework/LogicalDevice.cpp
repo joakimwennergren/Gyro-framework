@@ -1,13 +1,15 @@
 #include "LogicalDevice.hpp"
 
-LogicalDevice::LogicalDevice(VkPhysicalDevice physicalDevice)
+LogicalDevice::LogicalDevice()
 {
+	/*
 	// Sanity check
 	if (physicalDevice ==  VK_NULL_HANDLE)
 	{
 		spdlog::critical("Trying to initialize a logical device with an null handle physical device!");
 		return;
 	}
+	*/
 
 	spdlog::info("Trying to initialize a logical device..");
 

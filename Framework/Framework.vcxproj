@@ -147,21 +147,31 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="DebugCallbacks.cpp" />
+    <ClCompile Include="DebugHelpers.cpp" />
+    <ClCompile Include="VulkanExtension.cpp" />
     <ClCompile Include="File.cpp" />
-    <ClCompile Include="Framework.cpp" />
+    <ClCompile Include="VulkanInstance.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="BaseModel.cpp" />
     <ClCompile Include="LogicalDevice.cpp" />
     <ClCompile Include="ModelHelper.cpp" />
+    <ClCompile Include="PhysicalDevice.cpp" />
     <ClCompile Include="ValidationLayer.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="DebugCallbacks.hpp" />
     <ClInclude Include="Configuration.hpp" />
+    <ClInclude Include="DebugHelpers.hpp" />
+    <ClInclude Include="VulkanExtension.hpp" />
     <ClInclude Include="File.hpp" />
     <ClInclude Include="Framework.hpp" />
     <ClInclude Include="BaseModel.hpp" />
+    <ClInclude Include="VulkanInstance.hpp" />
     <ClInclude Include="LogicalDevice.hpp" />
     <ClInclude Include="ModelHelper.hpp" />
+    <ClInclude Include="PhysicalDevice.hpp" />
     <ClInclude Include="ValidationLayer.hpp" />
     <ClInclude Include="Window.hpp" />
   </ItemGroup>
@@ -169,9 +179,6 @@
     <None Include="compile_shader.bat" />
     <None Include="Shader.frag" />
     <None Include="Shader.vert" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="..\..\..\..\Desktop\viking_room.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
