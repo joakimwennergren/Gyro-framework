@@ -4,22 +4,8 @@
 Vulkan::Vulkan()
 {
 
-#if ENABLE_VALIDATION_LAYERS
-
-	// Set up validation layers & debugging..
-	if (ValidationLayer::checkValidationLayerSupport()) {
-		vulkanDebugMessenger.Initialize();
-	}
-	else {
-		spdlog::critical("Validation layers & debugging requested, but wasn't supported. Skipping..");
-	}
-
-#endif
-
-	// Create physical and logical devices.. @todo should they be on the window object?
-	//physicalDevice.Initialize();
-	//logicalDevice.Initialize(physicalDevice);
 }
+
 
 Vulkan::~Vulkan()
 {
@@ -54,4 +40,25 @@ Vulkan::~Vulkan()
 
 	vkDestroyInstance(this->instance, nullptr);
 	*/
+}
+
+void Vulkan::Initialize()
+{
+
+#if ENABLE_VALIDATION_LAYERS
+
+	// Set up validation layers & debugging..
+	if (ValidationLayer::checkValidationLayerSupport()) {
+		vulkanDebugMessenger.Initialize();
+	}
+	else {
+		spdlog::critical("Validation layers & debugging requested, but wasn't supported. Skipping..");
+	}
+
+#endif
+
+	physicalDevice.Initialize();
+	logicalDevice.Initialize(physicalDevice);
+
+	commandPool.Initialize(logicalDevice);
 }

@@ -4,7 +4,12 @@
 
 Window::Window()
 {
+
 	glfw.Initialize();
+
+#if USE_VULKAN == true
+	vulkan.Initialize();
+#endif
 }
 
 Window::~Window()
@@ -15,19 +20,6 @@ Window::~Window()
 
 /*
 void Window::initVulkan() {
-
-#if ENABLE_VALIDATION_LAYERS
-	// Set up validation layers & debugging..
-	if (ValidationLayer::checkValidationLayerSupport()) {
-		vulkanDebugMessenger.Initialize();
-	} else {
-		spdlog::critical("Validation layers & debugging requested, but wasn't supported. Skipping..");
-	}
-#endif
-	
-	// Create physical and logical devices.. @todo should they be on the window object?
-	physicalDevice.Initialize();
-	logicalDevice.Initialize(physicalDevice);
 
 	createSwapChain();
 	createImageViews();
@@ -110,105 +102,6 @@ void Window::createSurface()
 	spdlog::info("Successfully created a window surface!");
 }
 
-void Window:: createSwapChain() {
-	SwapChainSupportDetails swapChainSupport = querySwapChainSupport(physicalDevice.device);
-
-	VkSurfaceFormatKHR surfaceFormat = chooseSwapSurfaceFormat(swapChainSupport.formats);
-	VkPresentModeKHR presentMode = chooseSwapPresentMode(swapChainSupport.presentModes);
-	VkExtent2D extent = chooseSwapExtent(swapChainSupport.capabilities);
-
-
-	uint32_t imageCount = swapChainSupport.capabilities.minImageCount + 1;
-
-	if (swapChainSupport.capabilities.maxImageCount > 0 && imageCount > swapChainSupport.capabilities.maxImageCount) {
-		imageCount = swapChainSupport.capabilities.maxImageCount;
-	}
-
-	VkSwapchainCreateInfoKHR createInfo{};
-	createInfo.sType = VK_STRUCTURE_TYPE_SWAPCHAIN_CREATE_INFO_KHR;
-	createInfo.surface = surface;
-
-
-	createInfo.minImageCount = imageCount;
-	createInfo.imageFormat = surfaceFormat.format;
-	createInfo.imageColorSpace = surfaceFormat.colorSpace;
-	createInfo.imageExtent = extent;
-	createInfo.imageArrayLayers = 1;
-	createInfo.imageUsage = VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT;
-
-
-	createInfo.imageSharingMode = VK_SHARING_MODE_EXCLUSIVE;
-
-	createInfo.preTransform = swapChainSupport.capabilities.currentTransform;
-
-	createInfo.compositeAlpha = VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR;
-
-	createInfo.presentMode = presentMode;
-	createInfo.clipped = VK_TRUE;
-
-	createInfo.oldSwapchain = VK_NULL_HANDLE;
-
-
-	if (vkCreateSwapchainKHR(logicalDevice.device, &createInfo, nullptr, &swapChain) != VK_SUCCESS) {
-		spdlog::critical("Couldn\'t create swap chain!");
-	}
-
-
-	vkGetSwapchainImagesKHR(logicalDevice.device, swapChain, &imageCount, nullptr);
-
-	swapChainImages.resize(imageCount);
-	vkGetSwapchainImagesKHR(logicalDevice.device, swapChain, &imageCount, swapChainImages.data());
-
-	swapChainImageFormat = surfaceFormat.format;
-	swapChainExtent = extent;
-}
-
-VkSurfaceFormatKHR  Window::chooseSwapSurfaceFormat(const std::vector<VkSurfaceFormatKHR>& availableFormats) 
-{
-	for (const auto& availableFormat : availableFormats) {
-		if (availableFormat.format == VK_FORMAT_B8G8R8A8_SRGB && availableFormat.colorSpace == VK_COLOR_SPACE_SRGB_NONLINEAR_KHR) {
-			return availableFormat;
-		}
-	}
-
-	return availableFormats[0];
-}
-
-
-VkPresentModeKHR Window::chooseSwapPresentMode(const std::vector<VkPresentModeKHR>& availablePresentModes) {
-	for (const auto& availablePresentMode : availablePresentModes) {
-		if (availablePresentMode == VK_PRESENT_MODE_MAILBOX_KHR) {
-			return availablePresentMode;
-		}
-	}
-
-	return VK_PRESENT_MODE_FIFO_KHR;
-}
-
-VkExtent2D Window::chooseSwapExtent(const VkSurfaceCapabilitiesKHR& capabilities) 
-{
-	if (capabilities.currentExtent.width != UINT32_MAX) {
-		return capabilities.currentExtent;
-	}
-
-
-	else {
-		int width, height;
-		glfwGetFramebufferSize(window, &width, &height);
-
-		VkExtent2D actualExtent = {
-			static_cast<uint32_t>(width),
-			static_cast<uint32_t>(height)
-		};
-
-		actualExtent.width = std::clamp(actualExtent.width, capabilities.minImageExtent.width, capabilities.maxImageExtent.width);
-		actualExtent.height = std::clamp(actualExtent.height, capabilities.minImageExtent.height, capabilities.maxImageExtent.height);
-
-		return actualExtent;
-	}
-}
-
-
 
 bool Window::isDeviceSuitable(VkPhysicalDevice device) {
 	QueueFamilyIndices indices = findQueueFamilies(device);
@@ -247,32 +140,6 @@ Window::QueueFamilyIndices Window::findQueueFamilies(VkPhysicalDevice device) {
 	}
 
 	return indices;
-}
-
-
-
-SwapChainSupportDetails Window::querySwapChainSupport(VkPhysicalDevice device) {
-	SwapChainSupportDetails details;
-	vkGetPhysicalDeviceSurfaceCapabilitiesKHR(device, surface, &details.capabilities);
-	uint32_t formatCount;
-	vkGetPhysicalDeviceSurfaceFormatsKHR(device, surface, &formatCount, nullptr);
-
-	if (formatCount != 0) {
-		details.formats.resize(formatCount);
-		vkGetPhysicalDeviceSurfaceFormatsKHR(device, surface, &formatCount, details.formats.data());
-	}
-
-	uint32_t presentModeCount;
-	vkGetPhysicalDeviceSurfacePresentModesKHR(device, surface, &presentModeCount, nullptr);
-
-	if (presentModeCount != 0) {
-		details.presentModes.resize(presentModeCount);
-		vkGetPhysicalDeviceSurfacePresentModesKHR(device, surface, &presentModeCount, details.presentModes.data());
-	}
-
-
-
-	return details;
 }
 
 
@@ -507,20 +374,6 @@ void Window::createFramebuffers() {
 		if (vkCreateFramebuffer(logicalDevice.device, &framebufferInfo, nullptr, &swapChainFramebuffers[i]) != VK_SUCCESS) {
 			spdlog::critical("Couldn\'t!");
 		}
-	}
-}
-
-void Window::createCommandPool()
-{
-	QueueFamilyIndices queueFamilyIndices = findQueueFamilies(physicalDevice.device);
-
-	VkCommandPoolCreateInfo poolInfo{};
-	poolInfo.sType = VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO;
-	poolInfo.queueFamilyIndex = 0;
-	poolInfo.flags = 0; // Optional
-
-	if (vkCreateCommandPool(logicalDevice.device, &poolInfo, nullptr, &commandPool) != VK_SUCCESS) {
-		spdlog::critical("Couldn\'t!");
 	}
 }
 

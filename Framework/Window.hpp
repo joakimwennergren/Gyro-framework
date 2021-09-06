@@ -12,18 +12,10 @@
 #include <tiny_obj_loader.h>
 
 #include "spdlog/spdlog.h"
-#include "LogicalDevice.hpp"
-#include "PhysicalDevice.hpp"
 #include "stb_image.h"
 #include "Configuration.hpp"
-#include "logicalDevice.hpp"
-#include "ValidationLayer.hpp"
-#include "File.hpp"
-#include "VulkanInstance.hpp"
-#include "DebugHelpers.hpp"
-#include "DebugCallbacks.hpp"
-#include "DebugMessenger.hpp"
 #include "GLFW.hpp"
+#include "Vulkan.hpp"
 
 struct Vertex {
 	glm::vec3 pos;
@@ -42,11 +34,7 @@ struct Vertex {
 	}
 };
 
-struct SwapChainSupportDetails {
-	VkSurfaceCapabilitiesKHR capabilities;
-	std::vector<VkSurfaceFormatKHR> formats;
-	std::vector<VkPresentModeKHR> presentModes;
-};
+
 
 
 class Window
@@ -83,16 +71,14 @@ private:
 	// GlFW window
 	GLFW glfw;
 
+#if USE_VULKAN == true
+	// Vulkan API
+	Vulkan vulkan;
+#endif
 
 	// Helper functions to decide if physical device is suitable for the application
 	// And to find queue families.
 	bool isDeviceSuitable(VkPhysicalDevice device);
-
-	VkSurfaceFormatKHR chooseSwapSurfaceFormat(const std::vector<VkSurfaceFormatKHR>& availableFormats);
-	VkPresentModeKHR chooseSwapPresentMode(const std::vector<VkPresentModeKHR>& availablePresentModes);
-	VkExtent2D chooseSwapExtent(const VkSurfaceCapabilitiesKHR& capabilities);
-
-
 
 	std::vector<VkFramebuffer> swapChainFramebuffers;
 
@@ -116,13 +102,11 @@ private:
 
 	void drawFrame();
 
-	void initVulkan();
-
 	void createSurface();
 
 	void createImageViews();
 
-	SwapChainSupportDetails querySwapChainSupport(VkPhysicalDevice device);
+	//SwapChainSupportDetails querySwapChainSupport(VkPhysicalDevice device);
 	void createSwapChain();
 
 	bool checkDeviceExtensionSupport(VkPhysicalDevice device);

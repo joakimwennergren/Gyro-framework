@@ -147,10 +147,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CommandBuffer.cpp" />
+    <ClCompile Include="CommandPool.cpp" />
     <ClCompile Include="DebugCallbacks.cpp" />
     <ClCompile Include="DebugHelpers.cpp" />
     <ClCompile Include="DebugMessenger.cpp" />
     <ClCompile Include="GLFW.cpp" />
+    <ClCompile Include="Swapchain.cpp" />
     <ClCompile Include="Vulkan.cpp" />
     <ClCompile Include="VulkanExtension.cpp" />
     <ClCompile Include="File.cpp" />
@@ -161,14 +164,18 @@
     <ClCompile Include="ModelHelper.cpp" />
     <ClCompile Include="PhysicalDevice.cpp" />
     <ClCompile Include="ValidationLayer.cpp" />
+    <ClCompile Include="VulkanSurface.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CommandBuffer.hpp" />
+    <ClInclude Include="CommandPool.hpp" />
     <ClInclude Include="DebugCallbacks.hpp" />
     <ClInclude Include="Configuration.hpp" />
     <ClInclude Include="DebugHelpers.hpp" />
     <ClInclude Include="DebugMessenger.hpp" />
     <ClInclude Include="GLFW.hpp" />
+    <ClInclude Include="Swapchain.hpp" />
     <ClInclude Include="VulkanExtension.hpp" />
     <ClInclude Include="File.hpp" />
     <ClInclude Include="Framework.hpp" />
@@ -179,6 +186,7 @@
     <ClInclude Include="ModelHelper.hpp" />
     <ClInclude Include="PhysicalDevice.hpp" />
     <ClInclude Include="ValidationLayer.hpp" />
+    <ClInclude Include="VulkanSurface.hpp" />
     <ClInclude Include="Window.hpp" />
   </ItemGroup>
   <ItemGroup>

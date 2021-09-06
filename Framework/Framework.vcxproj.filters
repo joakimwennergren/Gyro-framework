@@ -103,6 +103,30 @@
     <Filter Include="Source Files\GLFW">
       <UniqueIdentifier>{b115f093-1003-443a-939f-ccccae387c86}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Vulkan\Swapchain">
+      <UniqueIdentifier>{800c1113-fa11-403c-bcbd-8998acd099a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Vulkan\Swapchain">
+      <UniqueIdentifier>{70f4b342-8727-43f6-a319-5a3695339d45}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Vulkan\CommandBuffer">
+      <UniqueIdentifier>{f23d610f-8329-4f49-8c41-e4c1668eca34}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Vulkan\CommandBuffer">
+      <UniqueIdentifier>{ef5a1230-ee37-4ad4-902a-42a9d8d435ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Vulkan\CommandPool">
+      <UniqueIdentifier>{e38b6765-3175-43ca-a28a-a9c21ffd691e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Vulkan\CommandPool">
+      <UniqueIdentifier>{be1e4c90-b415-48f9-958f-e1a616f38834}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Vulkan\Surface">
+      <UniqueIdentifier>{0f7da452-520d-4d8a-aeed-afa61caf933c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Vulkan\Surface">
+      <UniqueIdentifier>{97fe84ae-d131-4786-b950-1ceb42912735}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -149,6 +173,18 @@
     </ClCompile>
     <ClCompile Include="GLFW.cpp">
       <Filter>Source Files\GLFW</Filter>
+    </ClCompile>
+    <ClCompile Include="Swapchain.cpp">
+      <Filter>Source Files\Vulkan\Swapchain</Filter>
+    </ClCompile>
+    <ClCompile Include="CommandBuffer.cpp">
+      <Filter>Source Files\Vulkan\CommandBuffer</Filter>
+    </ClCompile>
+    <ClCompile Include="CommandPool.cpp">
+      <Filter>Source Files\Vulkan\CommandPool</Filter>
+    </ClCompile>
+    <ClCompile Include="VulkanSurface.cpp">
+      <Filter>Source Files\Vulkan\Surface</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -199,6 +235,18 @@
     </ClInclude>
     <ClInclude Include="GLFW.hpp">
       <Filter>Header Files\GLFW</Filter>
+    </ClInclude>
+    <ClInclude Include="Swapchain.hpp">
+      <Filter>Header Files\Vulkan\Swapchain</Filter>
+    </ClInclude>
+    <ClInclude Include="CommandBuffer.hpp">
+      <Filter>Header Files\Vulkan\CommandBuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="CommandPool.hpp">
+      <Filter>Header Files\Vulkan\CommandPool</Filter>
+    </ClInclude>
+    <ClInclude Include="VulkanSurface.hpp">
+      <Filter>Header Files\Vulkan\Surface</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

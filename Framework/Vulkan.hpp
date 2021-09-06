@@ -3,13 +3,18 @@
 #include "DebugMessenger.hpp"
 #include "spdlog/spdlog.h"
 #include "LogicalDevice.hpp"
+#include "CommandPool.hpp"
+#include "VulkanSurface.hpp"
 
 class Vulkan
 {
+
 public:
+
 	Vulkan();
 	~Vulkan();
-protected:
+	void Initialize();
+
 private:
 
 	// Debug messenger
@@ -23,6 +28,12 @@ private:
 	VkQueue graphicsQueue;
 	VkQueue presentQueue;
 
+	// Commands
+	CommandPool commandPool;
+
+	// Surface
+	VulkanSurface surface;
+
 	// Swap Chain
 	VkSwapchainKHR swapChain;
 
@@ -34,4 +45,5 @@ private:
 	// Semaphores
 	VkSemaphore imageAvailableSemaphore;
 	VkSemaphore renderFinishedSemaphore;
+
 };

@@ -1,9 +1,15 @@
 #pragma once
 
+#include <vulkan/vulkan.hpp>
+
 // Application
-#define APPLICATION_NAME	"DEMOSCENE"
+#define APPLICATION_NAME	"GYRO"
 #define WINDOW_W	800
 #define WINDOW_H	600
+
+/* VULKAN SPECIFIC CONFIG */
+
+#define USE_VULKAN	true
 
 // Validation layers
 #define ENABLE_VALIDATION_LAYERS	true
