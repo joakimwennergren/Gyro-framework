@@ -1,6 +1,6 @@
 #include "GLFW.hpp"
 
-GLFW::GLFW()
+void GLFW::Initialize()
 {
 	spdlog::info("Trying to create a GLFW Window..");
 

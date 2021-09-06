@@ -4,8 +4,7 @@
 
 Window::Window()
 {
-
-
+	glfw.Initialize();
 }
 
 Window::~Window()

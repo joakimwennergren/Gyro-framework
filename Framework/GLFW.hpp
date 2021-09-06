@@ -8,8 +8,9 @@
 class GLFW
 {
 public:
-	GLFW();
+	void Initialize();
 	~GLFW();
+
 	GLFWwindow* window;
 private:
 
