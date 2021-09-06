@@ -7,51 +7,12 @@ Window::Window()
 	// GLFW
 	initializeGLFW();
 
-#ifdef ENABLE_VALIDATION_LAYERS
-	if (!ValidationLayer::checkValidationLayerSupport()) {
-		spdlog::critical("Validation layers requested, but not available!");
-		return;
-	}
-#endif
-
-	initVulkan();
 }
 
 Window::~Window()
 {
-	for (auto imageView : swapChainImageViews) {
-		vkDestroyImageView(this->logicalDevice.device, imageView, nullptr);
-	}
-
-	vkDestroyPipelineLayout(logicalDevice.device, pipelineLayout, nullptr);
-	vkDestroyPipeline(logicalDevice.device, graphicsPipeline, nullptr);
-
-	vkDestroyRenderPass(logicalDevice.device, renderPass, nullptr);
-
-	for (auto framebuffer : swapChainFramebuffers) {
-		vkDestroyFramebuffer(logicalDevice.device, framebuffer, nullptr);
-	}
-
-	vkDestroyCommandPool(logicalDevice.device, commandPool, nullptr);
-
-	vkDestroyShaderModule(this->logicalDevice.device, fragShaderModule, nullptr);
-	vkDestroyShaderModule(this->logicalDevice.device, vertShaderModule, nullptr);
-
-	vkDestroySemaphore(logicalDevice.device, renderFinishedSemaphore, nullptr);
-	vkDestroySemaphore(logicalDevice.device, imageAvailableSemaphore, nullptr);
-	/*
-	vkDestroySurfaceKHR(this->instance, this->surface, nullptr);
-	vkDestroyDevice(this->logicalDevice.device, nullptr);
-	if (enableValidationLayers) {
-		DestroyDebugUtilsMessengerEXT(this->instance, this->debugMessenger, nullptr);
-	}
-
-	vkDestroyInstance(this->instance, nullptr);
-	*/
 	glfwDestroyWindow(this->window);
-
 	glfwTerminate();
-
 }
 
 void Window::initializeGLFW()
@@ -84,19 +45,22 @@ void Window::initializeGLFW()
 }
 
 
-
+/*
 void Window::initVulkan() {
 
 #if ENABLE_VALIDATION_LAYERS
 	// Set up validation layers & debugging..
-	vulkanDebugMessenger.Initialize();
+	if (ValidationLayer::checkValidationLayerSupport()) {
+		vulkanDebugMessenger.Initialize();
+	} else {
+		spdlog::critical("Validation layers & debugging requested, but wasn't supported. Skipping..");
+	}
 #endif
 	
-	// Create physical and logical devices..
+	// Create physical and logical devices.. @todo should they be on the window object?
 	physicalDevice.Initialize();
 	logicalDevice.Initialize(physicalDevice);
 
-	/*
 	createSwapChain();
 	createImageViews();
 	createRenderPass();
@@ -106,9 +70,9 @@ void Window::initVulkan() {
 	createCommandBuffers();
 	createSemaphores();
 	vkGetDeviceQueue(logicalDevice.device, 0, 0, &presentQueue);
-	*/
-}
 
+}
+*/
 void Window::loop()
 {
 	while (!glfwWindowShouldClose(window)) 

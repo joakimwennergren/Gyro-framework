@@ -138,6 +138,9 @@
     <ClCompile Include="DebugMessenger.cpp">
       <Filter>Source Files\Vulkan\Debug</Filter>
     </ClCompile>
+    <ClCompile Include="Vulkan.cpp">
+      <Filter>Source Files\Vulkan</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.hpp">
@@ -181,6 +184,9 @@
     </ClInclude>
     <ClInclude Include="DebugMessenger.hpp">
       <Filter>Header Files\Vulkan\Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="Vulkan.hpp">
+      <Filter>Header Files\Vulkan</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

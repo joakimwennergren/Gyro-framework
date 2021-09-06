@@ -150,6 +150,7 @@
     <ClCompile Include="DebugCallbacks.cpp" />
     <ClCompile Include="DebugHelpers.cpp" />
     <ClCompile Include="DebugMessenger.cpp" />
+    <ClCompile Include="Vulkan.cpp" />
     <ClCompile Include="VulkanExtension.cpp" />
     <ClCompile Include="File.cpp" />
     <ClCompile Include="VulkanInstance.cpp" />
@@ -170,6 +171,7 @@
     <ClInclude Include="File.hpp" />
     <ClInclude Include="Framework.hpp" />
     <ClInclude Include="BaseModel.hpp" />
+    <ClInclude Include="Vulkan.hpp" />
     <ClInclude Include="VulkanInstance.hpp" />
     <ClInclude Include="LogicalDevice.hpp" />
     <ClInclude Include="ModelHelper.hpp" />

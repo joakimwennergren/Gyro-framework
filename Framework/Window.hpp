@@ -43,9 +43,6 @@ struct Vertex {
 	}
 };
 
-const std::string MODEL_PATH = "models/viking_room.obj";
-const std::string TEXTURE_PATH = "textures/viking_room.png";
-
 struct SwapChainSupportDetails {
 	VkSurfaceCapabilitiesKHR capabilities;
 	std::vector<VkSurfaceFormatKHR> formats;
@@ -101,49 +98,7 @@ private:
 	VkPresentModeKHR chooseSwapPresentMode(const std::vector<VkPresentModeKHR>& availablePresentModes);
 	VkExtent2D chooseSwapExtent(const VkSurfaceCapabilitiesKHR& capabilities);
 
-	VkResult CreateDebugUtilsMessengerEXT(
-		VkInstance instance,
-		const VkDebugUtilsMessengerCreateInfoEXT* pCreateInfo,
-		const VkAllocationCallbacks* pAllocator,
-		VkDebugUtilsMessengerEXT* pDebugMessenger
-	);
 
-	void setupDebugMessenger();
-
-	void DestroyDebugUtilsMessengerEXT(
-		VkInstance instance,
-		VkDebugUtilsMessengerEXT debugMessenger,
-		const VkAllocationCallbacks* pAllocator
-	);
-
-
-	// Physical & Logical devices @todo(rename to physicalDevice & logicalDevice)
-	PhysicalDevice physicalDevice = PhysicalDevice();
-	LogicalDevice logicalDevice = LogicalDevice();
-
-	// Queues
-	VkQueue graphicsQueue;
-	VkQueue presentQueue;
-
-	// Surface(s)
-	VkSurfaceKHR surface;
-
-	// Swap Chain
-	VkSwapchainKHR swapChain;
-
-	VulkanDebugMessenger vulkanDebugMessenger;
-
-	std::vector<VkImage> swapChainImages;
-	VkFormat swapChainImageFormat;
-	VkExtent2D swapChainExtent;
-	std::vector<VkImageView> swapChainImageViews;
-
-	VkShaderModule vertShaderModule;
-	VkShaderModule fragShaderModule;
-
-	VkRenderPass renderPass;
-	VkPipelineLayout pipelineLayout;
-	VkPipeline graphicsPipeline;
 
 	std::vector<VkFramebuffer> swapChainFramebuffers;
 
@@ -178,24 +133,12 @@ private:
 
 	bool checkDeviceExtensionSupport(VkPhysicalDevice device);
 
-	VkSemaphore imageAvailableSemaphore;
-	VkSemaphore renderFinishedSemaphore;
-
-
-	VkImage textureImage;
-	VkDeviceMemory textureImageMemory;
-
 
 	VkCommandBuffer beginSingleTimeCommands();
 	void endSingleTimeCommands(VkCommandBuffer commandBuffer);
 	void copyBuffer(VkBuffer srcBuffer, VkBuffer dstBuffer, VkDeviceSize size);
 	void transitionImageLayout(VkImage image, VkFormat format, VkImageLayout oldLayout, VkImageLayout newLayout);
 
-
-	std::vector<Vertex> vertices;
-	std::vector<uint32_t> indices;
-	VkBuffer vertexBuffer;
-	VkDeviceMemory vertexBufferMemory;
 };
 
 
