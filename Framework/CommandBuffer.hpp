@@ -4,5 +4,8 @@
 
 class CommandBuffer
 {
-
+public:
+	void Create();
+private:
+	VkCommandBuffer buffer;
 };

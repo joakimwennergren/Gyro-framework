@@ -127,6 +127,60 @@
     <Filter Include="Source Files\Vulkan\Surface">
       <UniqueIdentifier>{97fe84ae-d131-4786-b950-1ceb42912735}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Vulkan\ShaderModule">
+      <UniqueIdentifier>{11e8a355-9d90-4dd4-b579-e3278f6864a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Vulkan\ShaderModule">
+      <UniqueIdentifier>{ab5fa946-5e00-4bdb-b45f-188eb60baf81}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Vulkan\RenderPass">
+      <UniqueIdentifier>{2f620be7-747a-4f78-b266-b38abba6db65}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Vulkan\RenderPass">
+      <UniqueIdentifier>{ca4db26e-04f7-4746-8f65-716c2eeb6d6d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Vulkan\Semaphore">
+      <UniqueIdentifier>{b83207b1-3bd0-492f-b4c1-8b04f2d4efd9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Vulkan\Semaphore">
+      <UniqueIdentifier>{35f08600-9edf-49e5-84bd-f5189d0b6351}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Vulkan\Image">
+      <UniqueIdentifier>{d47c040d-c5bd-4631-b4bc-f564f8500284}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Vulkan\Texture">
+      <UniqueIdentifier>{d1d39711-850f-4955-8f70-649973132594}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Vulkan\Texture">
+      <UniqueIdentifier>{40791365-0124-4a39-b12e-6afa3601b3ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Vulkan\Utility">
+      <UniqueIdentifier>{9eb71c32-a66c-4b88-81f3-af8c3222d71a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Vulkan\Utility">
+      <UniqueIdentifier>{1d4614a4-1c43-43ae-bb32-64f7ab4030ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Vulkan\ImageView">
+      <UniqueIdentifier>{44dc6c64-2b18-49e8-9ec4-fa633665bd32}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Vulkan\Pipelines">
+      <UniqueIdentifier>{ac44ccb8-7dec-4093-b331-80fc1a0141d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Vulkan\Pipelines\GraphicsPipeline">
+      <UniqueIdentifier>{94d32394-fe78-4135-a834-3eea9d7d243e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Vulkan\Pipelines\PipelineLayout">
+      <UniqueIdentifier>{b303089e-c682-401d-ad1d-113df048d586}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Vulkan\Pipelines">
+      <UniqueIdentifier>{d00fdc99-2a53-4ae3-8897-4a02040d8e1c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Vulkan\Pipelines\PipelineLayout">
+      <UniqueIdentifier>{d329af7e-a2d9-446d-88a5-4e317f53caaf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Vulkan\Pipelines\GraphicsPipeline">
+      <UniqueIdentifier>{e2cddebb-3b41-4363-bd34-a01877059e60}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -185,6 +239,30 @@
     </ClCompile>
     <ClCompile Include="VulkanSurface.cpp">
       <Filter>Source Files\Vulkan\Surface</Filter>
+    </ClCompile>
+    <ClCompile Include="ShaderModule.cpp">
+      <Filter>Source Files\Vulkan\ShaderModule</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderPass.cpp">
+      <Filter>Source Files\Vulkan\RenderPass</Filter>
+    </ClCompile>
+    <ClCompile Include="VulkanSemaphore.cpp">
+      <Filter>Source Files\Vulkan\Semaphore</Filter>
+    </ClCompile>
+    <ClCompile Include="VulkanImageView.cpp">
+      <Filter>Source Files\Vulkan\ImageView</Filter>
+    </ClCompile>
+    <ClCompile Include="VulkanTexture.cpp">
+      <Filter>Source Files\Vulkan\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="VulkanUtility.cpp">
+      <Filter>Source Files\Vulkan\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="VulkanPipelineLayout.cpp">
+      <Filter>Source Files\Vulkan\Pipelines\PipelineLayout</Filter>
+    </ClCompile>
+    <ClCompile Include="VulkanGraphicsPipeline.cpp">
+      <Filter>Source Files\Vulkan\Pipelines\GraphicsPipeline</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -247,6 +325,30 @@
     </ClInclude>
     <ClInclude Include="VulkanSurface.hpp">
       <Filter>Header Files\Vulkan\Surface</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderModule.hpp">
+      <Filter>Header Files\Vulkan\ShaderModule</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderPass.hpp">
+      <Filter>Header Files\Vulkan\RenderPass</Filter>
+    </ClInclude>
+    <ClInclude Include="VulkanSemaphore.hpp">
+      <Filter>Header Files\Vulkan\Semaphore</Filter>
+    </ClInclude>
+    <ClInclude Include="VulkanImageView.hpp">
+      <Filter>Header Files\Vulkan\Image</Filter>
+    </ClInclude>
+    <ClInclude Include="VulkanTexture.hpp">
+      <Filter>Header Files\Vulkan\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="VulkanUtility.hpp">
+      <Filter>Header Files\Vulkan\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="VulkanPipelineLayout.hpp">
+      <Filter>Header Files\Vulkan\Pipelines\PipelineLayout</Filter>
+    </ClInclude>
+    <ClInclude Include="VulkanGraphicsPipeline.hpp">
+      <Filter>Header Files\Vulkan\Pipelines\GraphicsPipeline</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -58,7 +58,6 @@ void SwapChain::Initialize(PhysicalDevice physicalDevice, LogicalDevice logicalD
 
 SwapChain::SwapChainSupportDetails SwapChain::querySwapChainSupport(PhysicalDevice physicalDevice, VulkanSurface vulkanSurface) 
 {
-	
 	SwapChainSupportDetails details;
 	
 	vkGetPhysicalDeviceSurfaceCapabilitiesKHR(physicalDevice.device, vulkanSurface.surface, &details.capabilities);
@@ -109,12 +108,12 @@ VkExtent2D SwapChain::chooseSwapExtent(const VkSurfaceCapabilitiesKHR& capabilit
 {
 	if (capabilities.currentExtent.width != UINT32_MAX) {
 		return capabilities.currentExtent;
-	}
+	} else {
+		
+		GLFW* glfw = glfw->getInstance();
 
-	/*
-	else {
 		int width, height;
-		glfwGetFramebufferSize(window, &width, &height);
+		glfwGetFramebufferSize(glfw->getWindow(), &width, &height);
 
 		VkExtent2D actualExtent = {
 			static_cast<uint32_t>(width),
@@ -126,5 +125,4 @@ VkExtent2D SwapChain::chooseSwapExtent(const VkSurfaceCapabilitiesKHR& capabilit
 
 		return actualExtent;
 	}
-	*/
 }

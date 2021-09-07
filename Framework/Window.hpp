@@ -57,19 +57,14 @@ public:
 
 	QueueFamilyIndices findQueueFamilies(VkPhysicalDevice device);
 
-	// Constructor
 	Window();
 
-	// Destructor
 	~Window();
 
 	void loop();
 
 
 private:
-
-	// GlFW window
-	GLFW glfw;
 
 #if USE_VULKAN == true
 	// Vulkan API
@@ -82,16 +77,10 @@ private:
 
 	std::vector<VkFramebuffer> swapChainFramebuffers;
 
-
 	void createRenderPass();
 
 	void createFramebuffers();
 
-	VkCommandPool commandPool;
-
-	std::vector<VkCommandBuffer> commandBuffers;
-
-	VkShaderModule createShaderModule(const std::vector<char>& code);
 	void createGraphicsPipeline();
 
 	void createCommandPool();
@@ -107,7 +96,6 @@ private:
 	void createImageViews();
 
 	//SwapChainSupportDetails querySwapChainSupport(VkPhysicalDevice device);
-	void createSwapChain();
 
 	bool checkDeviceExtensionSupport(VkPhysicalDevice device);
 

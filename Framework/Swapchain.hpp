@@ -4,6 +4,7 @@
 #include "PhysicalDevice.hpp"
 #include "LogicalDevice.hpp"
 #include "VulkanSurface.hpp"
+#include "GLFW.hpp"
 
 class SwapChain
 {
@@ -19,11 +20,13 @@ public:
 
 	SwapChainSupportDetails querySwapChainSupport(PhysicalDevice physicalDevice,  VulkanSurface vulkanSurface);
 
+	VkFormat getSwapChainImageFormat() { return this->swapChainImageFormat; }
+	VkExtent2D getSwapChainExtent() { return this->swapChainExtent; }
 private:
+
 	VkExtent2D swapChainExtent;
 	VkFormat swapChainImageFormat;
 	VkSwapchainKHR swapChain;
-
 
 	VkSurfaceFormatKHR  chooseSwapSurfaceFormat(const std::vector<VkSurfaceFormatKHR>& availableFormats);
 	VkPresentModeKHR chooseSwapPresentMode(const std::vector<VkPresentModeKHR>& availablePresentModes);
