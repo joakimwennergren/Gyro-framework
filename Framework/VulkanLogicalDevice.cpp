@@ -1,7 +1,17 @@
-#include "VulkanLogicalDevice.hpp"
+#include "LogicalDevice.hpp"
+
+LogicalDevice::LogicalDevice()
+{
+
+}
+
+LogicalDevice:: ~LogicalDevice()
+{
+
+}
 
 
-void VulkanLogicalDevice::Initialize(VulkanPhysicalDevice physicalDevice)
+void LogicalDevice::Initialize(PhysicalDevice physicalDevice)
 {
 
 	// Sanity check
@@ -24,6 +34,11 @@ void VulkanLogicalDevice::Initialize(VulkanPhysicalDevice physicalDevice)
 
 	// Device Features
 	VkPhysicalDeviceFeatures deviceFeatures{};
+
+	// Vulkan device extensions
+	const std::vector<const char*> deviceExtensions = {
+		VK_KHR_SWAPCHAIN_EXTENSION_NAME
+	};
 
 	// Create information
 	VkDeviceCreateInfo createInfo{};

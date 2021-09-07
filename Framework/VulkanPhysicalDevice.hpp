@@ -3,7 +3,7 @@
 #include "spdlog/spdlog.h"
 #include "VulkanInstance.hpp"
 
-class VulkanPhysicalDevice 
+class PhysicalDevice 
 {
 
 public:

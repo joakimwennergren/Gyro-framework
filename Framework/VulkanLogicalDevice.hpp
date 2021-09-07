@@ -1,13 +1,13 @@
 #pragma once
 #include <vulkan/vulkan.hpp>
 #include "spdlog/spdlog.h"
-#include "VulkanPhysicalDevice.hpp"
+#include "PhysicalDevice.hpp"
 #include "Configuration.hpp"
 
-class VulkanLogicalDevice
+class LogicalDevice
 {
 public:
-	void Initialize(VulkanPhysicalDevice physicalDevice);
+	void Initialize(PhysicalDevice physicalDevice);
 	VkDevice device;
 protected:
 

@@ -1,8 +1,8 @@
-#include "VulkanPhysicalDevice.hpp"
+#include "PhysicalDevice.hpp"
 #include "VulkanInstance.hpp"
 
 
-void VulkanPhysicalDevice::Initialize()
+void PhysicalDevice::Initialize()
 {
 	/*
 	spdlog::info("Enumerating physical devices(video cards)..");
@@ -32,7 +32,7 @@ void VulkanPhysicalDevice::Initialize()
 
 
 
-uint32_t VulkanPhysicalDevice::findMemoryType(uint32_t typeFilter, VkMemoryPropertyFlags properties) {
+uint32_t PhysicalDevice::findMemoryType(uint32_t typeFilter, VkMemoryPropertyFlags properties) {
 	
 	VkPhysicalDeviceMemoryProperties memProperties;
 	vkGetPhysicalDeviceMemoryProperties(device, &memProperties);

@@ -2,7 +2,7 @@
 #include <vulkan/vulkan.hpp>
 #include "Configuration.hpp"
 #include "spdlog/spdlog.h"
-#include "VulkanExtension.hpp"
+#include "VulkanUtility.hpp"
 #include "DebugCallbacks.hpp"
 
 class VulkanInstance {
@@ -44,8 +44,8 @@ class VulkanInstance {
 		createInfo.enabledLayerCount = 0;
 		createInfo.pNext = nullptr;
 #endif
-		
-		auto extensions = VulkanExtension::getRequiredExtensions();
+		/*
+		auto extensions = VulkanUtility::getRequiredExtensions();
 		createInfo.enabledExtensionCount = static_cast<uint32_t>(extensions.size());
 		createInfo.ppEnabledExtensionNames = extensions.data();
 
@@ -55,6 +55,8 @@ class VulkanInstance {
 		}
 
 		spdlog::info("Successfully initialized a vulkan instance!");
+
+		*/
 
     }
 

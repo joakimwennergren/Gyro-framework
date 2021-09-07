@@ -79,12 +79,6 @@
     <Filter Include="Header Files\Vulkan\Instances">
       <UniqueIdentifier>{f56f58f4-dc41-4603-a3cd-8157dd137355}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Vulkan\Extensions">
-      <UniqueIdentifier>{6beb83cf-018d-44d9-ae03-926b7c28fa3a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Vulkan\Extension">
-      <UniqueIdentifier>{2b7c2a15-6be7-4276-9e6e-3a0ba9b63bb5}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Vulkan\Debug">
       <UniqueIdentifier>{df35fd79-51db-4161-b173-2da9bb70ca80}</UniqueIdentifier>
     </Filter>
@@ -181,6 +175,12 @@
     <Filter Include="Source Files\Vulkan\Pipelines\GraphicsPipeline">
       <UniqueIdentifier>{e2cddebb-3b41-4363-bd34-a01877059e60}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Vulkan\Framebuffer">
+      <UniqueIdentifier>{e483769d-56e6-4b43-a043-7d34e15972c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Vulkan\FrameBuffer">
+      <UniqueIdentifier>{af88c7ec-ffc7-4a58-8d46-1b1e3705895b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -195,23 +195,14 @@
     <ClCompile Include="BaseModel.cpp">
       <Filter>Source Files\Model</Filter>
     </ClCompile>
-    <ClCompile Include="LogicalDevice.cpp">
-      <Filter>Source Files\Vulkan\Devices</Filter>
-    </ClCompile>
     <ClCompile Include="ValidationLayer.cpp">
       <Filter>Source Files\Vulkan\ValidationLayer</Filter>
     </ClCompile>
     <ClCompile Include="File.cpp">
       <Filter>Source Files\Utility</Filter>
     </ClCompile>
-    <ClCompile Include="PhysicalDevice.cpp">
-      <Filter>Source Files\Vulkan\Devices</Filter>
-    </ClCompile>
     <ClCompile Include="VulkanInstance.cpp">
       <Filter>Source Files\Vulkan\Instances</Filter>
-    </ClCompile>
-    <ClCompile Include="VulkanExtension.cpp">
-      <Filter>Source Files\Vulkan\Extension</Filter>
     </ClCompile>
     <ClCompile Include="DebugHelpers.cpp">
       <Filter>Source Files\Helpers\Debug</Filter>
@@ -264,22 +255,22 @@
     <ClCompile Include="VulkanGraphicsPipeline.cpp">
       <Filter>Source Files\Vulkan\Pipelines\GraphicsPipeline</Filter>
     </ClCompile>
+    <ClCompile Include="VulkanPhysicalDevice.cpp">
+      <Filter>Source Files\Vulkan\Devices</Filter>
+    </ClCompile>
+    <ClCompile Include="VulkanLogicalDevice.cpp">
+      <Filter>Source Files\Vulkan\Devices</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.hpp">
       <Filter>Header Files\Window</Filter>
-    </ClInclude>
-    <ClInclude Include="Framework.hpp">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ModelHelper.hpp">
       <Filter>Header Files\Helpers\Models</Filter>
     </ClInclude>
     <ClInclude Include="BaseModel.hpp">
       <Filter>Header Files\Model</Filter>
-    </ClInclude>
-    <ClInclude Include="LogicalDevice.hpp">
-      <Filter>Header Files\Vulkan\Devices</Filter>
     </ClInclude>
     <ClInclude Include="ValidationLayer.hpp">
       <Filter>Header Files\Vulkan\ValidationLayer</Filter>
@@ -290,14 +281,8 @@
     <ClInclude Include="File.hpp">
       <Filter>Header Files\Utility</Filter>
     </ClInclude>
-    <ClInclude Include="PhysicalDevice.hpp">
-      <Filter>Header Files\Vulkan\Devices</Filter>
-    </ClInclude>
     <ClInclude Include="VulkanInstance.hpp">
       <Filter>Header Files\Vulkan\Instances</Filter>
-    </ClInclude>
-    <ClInclude Include="VulkanExtension.hpp">
-      <Filter>Header Files\Vulkan\Extensions</Filter>
     </ClInclude>
     <ClInclude Include="DebugCallbacks.hpp">
       <Filter>Header Files\Vulkan\Debug</Filter>
@@ -349,6 +334,12 @@
     </ClInclude>
     <ClInclude Include="VulkanGraphicsPipeline.hpp">
       <Filter>Header Files\Vulkan\Pipelines\GraphicsPipeline</Filter>
+    </ClInclude>
+    <ClInclude Include="VulkanPhysicalDevice.hpp">
+      <Filter>Header Files\Vulkan\Devices</Filter>
+    </ClInclude>
+    <ClInclude Include="VulkanLogicalDevice.hpp">
+      <Filter>Header Files\Vulkan\Devices</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
