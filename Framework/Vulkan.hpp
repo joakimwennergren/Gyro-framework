@@ -35,7 +35,7 @@ private:
 
 	// Commands
 	CommandPool commandPool;
-	std::vector<CommandBuffer> commandBuffers;
+	std::vector<Gyro::Vulkan::Commands::CommandBuffer> commandBuffers;
 
 	// Surface
 	VulkanSurface surface;

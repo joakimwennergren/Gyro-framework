@@ -1,6 +1,7 @@
 #include "CommandBuffer.hpp"
 
-void CommandBuffer::Create()
+
+void Gyro::Vulkan::Commands::CommandBuffer::Create()
 {
 	/*
 	commandBuffers.resize(swapChainFramebuffers.size());

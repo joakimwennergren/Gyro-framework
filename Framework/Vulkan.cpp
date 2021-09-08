@@ -57,8 +57,4 @@ void Vulkan::Initialize()
 
 #endif
 
-	physicalDevice.Initialize();
-	logicalDevice.Initialize(physicalDevice);
-
-	commandPool.Initialize(logicalDevice);
 }

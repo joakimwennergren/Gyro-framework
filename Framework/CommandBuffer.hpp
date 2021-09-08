@@ -2,10 +2,21 @@
 
 #include <vulkan/vulkan.hpp>
 
-class CommandBuffer
+namespace Gyro
 {
-public:
-	void Create();
-private:
-	VkCommandBuffer buffer;
-};
+	namespace Vulkan
+	{
+		namespace Commands
+		{
+			class CommandBuffer
+			{
+			public:
+				void Create();
+			private:
+				VkCommandBuffer buffer;
+			};
+		}
+
+	}
+
+}
