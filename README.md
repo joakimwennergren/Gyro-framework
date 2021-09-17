@@ -45,6 +45,7 @@ might be good for inspiration regarding drawing functions etc.
 
 ### Similar projects
 * https://github.com/mosra/magnum
+* https://github.com/amzeratul/halley
 
 ### Organization Tips ( Since vulkan requires alot of code )
 * https://www.reddit.com/r/vulkan/comments/78ousv/how_to_organize_my_vulkan_code/
